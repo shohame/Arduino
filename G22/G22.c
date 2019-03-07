@@ -2,8 +2,10 @@
 
 int pin_L1 = 2;
 int pin_R1 = 3;
+
 int pin_L2 = 5;
 int pin_R2 = 4;
+
 
 int Nx = 32;
 int Ny = 32;
