@@ -16,8 +16,8 @@ struct typedef sPoint
 }stPoint;
 
 
-stPoint P1 = {10, 22};
-stPoint P2 = {21, 22};
+stPoint P1 = {10, 23};
+stPoint P2 = {21, 23};
 
 int Di1 = 0;  // direction of 1	
 int Di2 = 0;  // direction of 1	
