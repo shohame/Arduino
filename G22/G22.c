@@ -133,8 +133,6 @@ void loop()
 	
 	Reset_Game();
 	
-	
-	
 	while (GameOver == 0)
 	{
 		P1_arr[P12idx] = P1;
