@@ -3,7 +3,7 @@
 int pin_L1 = 2;
 int pin_R1 = 3;
 int pin_L2 = 4;
-int pin_R2 = 5;
+int pin_R2 = 7;
 
 int Nx = 32;
 int Ny = 32;
