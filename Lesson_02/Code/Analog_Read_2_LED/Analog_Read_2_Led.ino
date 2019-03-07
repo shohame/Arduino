@@ -8,8 +8,6 @@ Serial.begin(9600);
 pinMode(LedPin, OUTPUT);
 }
 
-
-
 void loop() 
 {
 int sensorValue = analogRead(AnalogPin);   
