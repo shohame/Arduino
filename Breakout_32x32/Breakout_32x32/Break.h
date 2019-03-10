@@ -9,8 +9,8 @@ typedef struct stLoc_name
 {
 	float	m_X;
 	float	m_Y;
-	float	m_w;
-	float	m_h;
+	char	m_w;
+	char	m_h;
 }stLoc;
 
 

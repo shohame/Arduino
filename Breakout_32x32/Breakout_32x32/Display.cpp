@@ -4,7 +4,7 @@
 #include "Display.h"
 #include <math.h>
 
-char Digit_arr[NUM_OF_DIG][DIG_HEIGHT][DIG_WIDTH] = 
+const   char Digit_arr[NUM_OF_DIG][DIG_HEIGHT][DIG_WIDTH] = 
 	{	
 		#include "Number_Bitmap.h"
 	};
@@ -75,17 +75,18 @@ void Display::MarkOnMatrix(int a_dT)
 		{
 			for(char x=0; x<DIG_WIDTH; x++)
 			{
-				Matrix[ y0 + y ][ x0 + x ] = Digit_arr[Di][y][x];
+				LM_SetPoint( x0 + x, y0 + y ,Digit_arr[Di][y][x]);
 			}
 		}
 	}
 	y0 = 0;
 	x0 = 27;
+  Di = m_Life;
 	for(char y=0; y<DIG_HEIGHT; y++)
 	{
 		for(char x=0; x<DIG_WIDTH; x++)
 		{
-			Matrix[ y0 + y ][ x0 + x ] = Digit_arr[m_Life][y][x];
+				LM_SetPoint( x0 + x, y0 + y ,Digit_arr[Di][y][x]);
 		}
 	}
 

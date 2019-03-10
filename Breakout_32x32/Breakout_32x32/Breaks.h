@@ -2,9 +2,9 @@
 #define __BREAKS_H
 
 
-#define MAX_NUM_OF_BREAKS	((8+7)*3)
-#define MAX_NUM_OF_BALLS		(50)
-#define MAX_NUM_OF_WALLS		(10)
+#define MAX_NUM_OF_BREAKS	((8)*4)
+#define MAX_NUM_OF_BALLS		(3)
+#define MAX_NUM_OF_WALLS		(5)
 
 
 class Breaks

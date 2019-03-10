@@ -2,21 +2,64 @@
 #include "stdafx.h"
 #include "General.h"
 #include "LED_Matrix.h"
-typedef unsigned  char    byte;
-
-char Matrix[N_Y][N_X];
-
-#define LC_SetPoint_on_LedStatus(A,B,C)	 Matrix[B][A] = C
-#define pgm_read_word_near(A) *A
 
 
+#ifdef WIN32
+	typedef unsigned  char    byte;
+  #define pgm_read_word_near(A) *A
+
+#else
+	#include "LedControl_HW.h"
+	#include "SPI.h"
+	LedControl_HW lc=LedControl_HW(10,16);
+#endif
+
+
+char Matrix[N_Y][N_X/8];
+
+
+void LM_Setup()
+{
+#ifdef WIN32
+#else
+	for(int M = 0; M < N_Y*N_X; M++)
+	{
+		lc.shutdown(M,false);
+		lc.setIntensity(M,4);
+		lc.clearDisplay(M);
+	}
+#endif
+
+}
 
 
 void LM_SetPoint(char a_x, char a_y, char a_Val)
 {
-	LC_SetPoint_on_LedStatus(a_x, a_y, a_Val);
-	//lc.LC_SetPoint_on_LedStatus(a_x, a_y, a_Val); 
+	char Xi, Xb;
+
+	Xi = a_x/8;
+	Xb = a_x%8;
+
+	if (a_Val==0)
+	{
+		Matrix[a_y][Xi] &= ((1<<Xb)^0xff);
+	}
+	else
+	{
+		Matrix[a_y][Xi] |= (1<<Xb);
+	}
 }
+
+char LM_GetPoint(char a_x, char a_y)
+{
+	char Xi, Xb;
+	Xi = a_x/8;
+	Xb = a_x%8;
+
+	return((Matrix[a_y][Xi]>>Xb)&1);
+}
+
+
 
 void LM_Clear()
 {
@@ -26,26 +69,13 @@ void LM_Clear()
 	{
 		for(x=0; x<N_X; x++)
 		{
-			Matrix[y][x] = 0;
+			LM_SetPoint(x, y, 0);
 		}
 	}
 }
 
 
-void LM_Init()
-{
-	char x,y;
-
-	for(y=0; y<N_Y; y++)
-	{
-		for(x=0; x<N_X; x++)
-		{
-			Matrix[y][x] = (x+y) & 1;
-		}
-	}
-}
-
-void LM_CopyImage2LedStatus(unsigned char * a_pI)
+void LM_CopyImage2Matrix(unsigned char * a_pI)
 {
   for(byte My = 0; My<4; My++)
   {
@@ -70,8 +100,7 @@ void LM_CopyImage2LedStatus(unsigned char * a_pI)
   }
 }
 
-
-#include <Windows.h>
+#ifdef WIN32
 
 void gotoxy(int x, int y)
 {
@@ -82,7 +111,7 @@ void gotoxy(int x, int y)
 
 
 
-void LM_PC_Display()
+void LM_PC_DSP_Display_Matrix()
 {
 	char x,y;
 
@@ -92,7 +121,7 @@ void LM_PC_Display()
 	{
 		for(x=0; x<N_X; x++)
 		{
-			if (Matrix[y][x])
+			if (LM_GetPoint(x, y))
 			{
 				printf("#");
 			}
@@ -104,4 +133,19 @@ void LM_PC_Display()
 		printf("\n");
 	}
 }
+#else
+void LM_PC_DSP_Display_Matrix()
+{
+	char x,y;
 
+	
+	for(y=0; y<N_Y; y++)
+	{
+		for(x=0; x<N_X; x++)
+		{
+			lc.LC_SetPoint_on_LedStatus(x, y, LM_GetPoint(x,y) );
+		}
+	}
+	lc.LC_UpdateLeds();
+}
+#endif

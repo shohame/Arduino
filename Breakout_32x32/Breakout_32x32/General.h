@@ -7,17 +7,21 @@
 #ifdef DO_DEBUG 
 	#include <assert.h>
 #endif
-
-
-#include <Windows.h>
 #include <math.h>
-#include <WinUser.h>
+
+#ifdef WIN32
+  #include <Windows.h>
+  #include <WinUser.h>
+  #define DELAY(a) Sleep(a)
+  #define PROGMEM
+#else
+#include <Arduino.h>
+#define DELAY(a) delay(a)
+#endif
 
 
-#define PROGMEM
 #define PI (3.14159265358979)
 
-#define DELAY(a) Sleep(a)
 
 #define fSIGN(a) ( (a>=0.0) ? 1.0 : -1.0 ) 
 #define ABS(a) ( (a>0) ? (a) : (-a) ) 

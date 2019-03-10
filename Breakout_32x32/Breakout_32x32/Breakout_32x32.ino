@@ -11,33 +11,51 @@
 #include "Breaks.h"
 #include "UI_Input.h"
 
+unsigned long g_Tic;
+
+#define TIC()   g_Tic=millis()
+#define TOC()   (millis()-g_Tic)
+
 
 Breaks g_Breaks;
 UI_Input g_UI_In;
 
 void setup()
 {
+  Serial.begin(9600);
+  DELAY(1000);
+  LM_Setup();
 	g_Breaks.InitLevel_1();
 	g_Breaks.m_Score.ResetGame();
 	LM_Clear();
 	g_Breaks.MarkBreaksOnMatrix();
 	g_Breaks.m_Score.MarkOnMatrix(0);
-	LM_PC_Display();
+	LM_PC_DSP_Display_Matrix();
+ TIC();
 }
 int DDD=0;
 void loop()
 {
+  unsigned long Toc = TOC();
+  TIC();
+ //Serial.println(TOC());
+  
+  
+	g_Breaks.MoveAllBalls(Toc);
 
-	g_Breaks.MoveAllBalls(50);
-
-	LM_Clear();
+  LM_Clear();
 	g_Breaks.MarkBreaksOnMatrix();
-	g_Breaks.m_Score.MarkOnMatrix(50);
-	LM_PC_Display();
+	g_Breaks.m_Score.MarkOnMatrix(Toc);
+	LM_PC_DSP_Display_Matrix();
 
 	if (g_Breaks.m_BallCount==0)
 	{
-	
+      g_Breaks.AddBall(16,28, 3, -6.0);
+
+      g_Breaks.AddBall(16,28, 4, -5.0);
+
+      g_Breaks.AddBall(16,28, -3, -6.0);
+
 
 	}
 	

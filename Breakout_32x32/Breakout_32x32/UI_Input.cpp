@@ -6,16 +6,16 @@
 UI_Input::UI_Input(void)
 {
 #ifndef WIN32
-	pinMode(PIN_KEY_L, OUTPUT);
-	pinMode(PIN_KEY_R, OUTPUT);
-	pinMode(PIN_KEY_U, OUTPUT);
-	pinMode(PIN_KEY_D, OUTPUT);
+	pinMode(PIN_KEY_L, INPUT_PULLUP);
+	pinMode(PIN_KEY_R, INPUT_PULLUP);
+	pinMode(PIN_KEY_U, INPUT_PULLUP);
+	pinMode(PIN_KEY_D, INPUT_PULLUP);
 
-	pinMode(PIN_PLAYER_1, INPUT);
-	pinMode(PIN_PLAYER_2, INPUT);
+	pinMode(PIN_PLAYER_1, OUTPUT);
+	pinMode(PIN_PLAYER_2, OUTPUT);
 
-	digitalWrite(PIN_PLAYER_1, 0);
-	digitalWrite(PIN_PLAYER_2, 0);
+	digitalWrite(PIN_PLAYER_1, 1);
+	digitalWrite(PIN_PLAYER_2, 1);
 #endif
 }
 
@@ -41,27 +41,27 @@ void UI_Input::GetKeyStatus(stKeyStatus* a_pKS_Player1, stKeyStatus* a_pKS_Playe
 
 void GetKeyStatus_sub(stKeyStatus* a_pKS_Player)
 {
-	a_pKS_Player->m_L = digitalRead(PIN_KEY_L)
-	a_pKS_Player->m_R = digitalRead(PIN_KEY_R)
-	a_pKS_Player->m_U = digitalRead(PIN_KEY_U)
-	a_pKS_Player->m_D = digitalRead(PIN_KEY_D)
+	a_pKS_Player->m_L = !digitalRead(PIN_KEY_L);
+	a_pKS_Player->m_R = !digitalRead(PIN_KEY_R);
+	a_pKS_Player->m_U = !digitalRead(PIN_KEY_U);
+	a_pKS_Player->m_D = !digitalRead(PIN_KEY_D);
 
 }
 
 void UI_Input::GetKeyStatus(stKeyStatus* a_pKS_Player1, stKeyStatus* a_pKS_Player2)
 {
-	digitalWrite(PIN_PLAYER_1, 1);
-	digitalWrite(PIN_PLAYER_2, 0);
-
-	GetKeyStatus_sub(a_pKS_Player1);
-
 	digitalWrite(PIN_PLAYER_1, 0);
 	digitalWrite(PIN_PLAYER_2, 1);
 
+	GetKeyStatus_sub(a_pKS_Player1);
+
+	digitalWrite(PIN_PLAYER_1, 1);
+	digitalWrite(PIN_PLAYER_2, 0);
+
 	GetKeyStatus_sub(a_pKS_Player2);
 
-	digitalWrite(PIN_PLAYER_1, 0);
-	digitalWrite(PIN_PLAYER_2, 0);
+	digitalWrite(PIN_PLAYER_1, 1);
+	digitalWrite(PIN_PLAYER_2, 1);
 
 }
 #endif

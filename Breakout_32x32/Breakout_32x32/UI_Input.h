@@ -2,10 +2,10 @@
 #define __UI_INPUT_H
 
 
-#define PIN_KEY_L	2
+#define PIN_KEY_L	5
 #define PIN_KEY_R	3
-#define PIN_KEY_U	4
-#define PIN_KEY_D	5
+#define PIN_KEY_U	2
+#define PIN_KEY_D	4
 
 
 #define PIN_PLAYER_1	16

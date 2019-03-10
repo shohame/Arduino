@@ -36,7 +36,7 @@ Break::~Break(void)
 			char xi = x + (char)floor(0.5 + m_Loc_s.m_X);
 			if ( yi>=0 && yi<N_Y && xi>=0 && xi<N_X)
 			{
-				Matrix[ yi ][ xi ] = 1;
+				LM_SetPoint(xi,  yi , 1);
 			}
 		}
 	}
