@@ -4,7 +4,7 @@
 #include "Display.h"
 #include <math.h>
 
-const   char Digit_arr[NUM_OF_DIG][DIG_HEIGHT][DIG_WIDTH] = 
+const   Line_Bit  Digit_arr[NUM_OF_DIG][DIG_HEIGHT]= 
 	{	
 		#include "Number_Bitmap.h"
 	};
@@ -39,14 +39,14 @@ void Display::MarkOnMatrix(int a_dT)
 	long tScore;
 	char x0, y0, Di;
 	m_Sum_dT = m_Sum_dT + a_dT; 
-	if(m_Sum_dT>1000)
+	if(m_Sum_dT>2000)
 	{
 		tScore = m_Score;
 		m_Sum_dT = 0;
 	}
 	else
 	{
-		int dS = exp(-(float)m_Sum_dT/200.0) * (m_Score - m_LastDispScore);
+		int dS = exp(-(float)m_Sum_dT/50.0) * (m_Score - m_LastDispScore);
 		dS = (m_Score > m_LastDispScore) ? MAX(1, dS) : 0;
 		tScore = m_LastDispScore + dS;
 	}
@@ -75,7 +75,8 @@ void Display::MarkOnMatrix(int a_dT)
 		{
 			for(char x=0; x<DIG_WIDTH; x++)
 			{
-				LM_SetPoint( x0 + x, y0 + y ,Digit_arr[Di][y][x]);
+				char Line = *(char*)&Digit_arr[Di][y];
+				LM_SetPoint( x0 + x, y0 + y ,(Line>>x) & 1);
 			}
 		}
 	}
@@ -86,7 +87,8 @@ void Display::MarkOnMatrix(int a_dT)
 	{
 		for(char x=0; x<DIG_WIDTH; x++)
 		{
-				LM_SetPoint( x0 + x, y0 + y ,Digit_arr[Di][y][x]);
+				char Line =*(char*)&Digit_arr[Di][y];
+				LM_SetPoint( x0 + x, y0 + y ,(Line>>x) & 1);
 		}
 	}
 

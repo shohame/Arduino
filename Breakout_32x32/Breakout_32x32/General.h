@@ -8,16 +8,36 @@
 	#include <assert.h>
 #endif
 #include <math.h>
+extern unsigned long g_Tic;
 
 #ifdef WIN32
-  #include <Windows.h>
-  #include <WinUser.h>
-  #define DELAY(a) Sleep(a)
-  #define PROGMEM
+	#include <Windows.h>
+	#include <WinUser.h>
+	#include <ctime>
+	#define SERIAL_BEGIN(F)
+	#define SERIAL_PRINT(F) 
+	#define SERIAL_PRINTLN(F) 
+	#define TICmS()   g_Tic = clock()
+	#define TOCmS()   (clock()-g_Tic)
+	#define DELAY(a) Sleep(a)
+	#define PROGMEM
 #else
-#include <Arduino.h>
-#define DELAY(a) delay(a)
+	#define SERIAL_BEGIN(F) Serial.begin(F)
+	#define SERIAL_PRINT(F) Serial.print(F)
+	#define SERIAL_PRINTLN(F) Serial.println(F)
+	#include <Arduino.h>
+	#define DELAY(a) delay(a)
+	#define TICmS()   g_Tic=millis()
+	#define TOCmS()   (millis()-g_Tic)
 #endif
+
+
+#ifdef WIN32
+#else
+#endif
+
+
+
 
 
 #define PI (3.14159265358979)

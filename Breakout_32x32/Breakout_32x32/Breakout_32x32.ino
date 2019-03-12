@@ -11,10 +11,6 @@
 #include "Breaks.h"
 #include "UI_Input.h"
 
-unsigned long g_Tic;
-
-#define TIC()   g_Tic=millis()
-#define TOC()   (millis()-g_Tic)
 
 
 Breaks g_Breaks;
@@ -22,23 +18,23 @@ UI_Input g_UI_In;
 
 void setup()
 {
-  Serial.begin(9600);
-  DELAY(1000);
-  LM_Setup();
+	SERIAL_BEGIN(9600);
+	DELAY(1000);
+	LM_Setup();
 	g_Breaks.InitLevel_1();
 	g_Breaks.m_Score.ResetGame();
 	LM_Clear();
 	g_Breaks.MarkBreaksOnMatrix();
 	g_Breaks.m_Score.MarkOnMatrix(0);
 	LM_PC_DSP_Display_Matrix();
- TIC();
+ TICmS();
 }
 int DDD=0;
 void loop()
 {
-  unsigned long Toc = TOC();
-  TIC();
- //Serial.println(TOC());
+  unsigned long Toc = TOCmS();
+  TICmS();
+ //Serial.println(TOCmS());
   
   
 	g_Breaks.MoveAllBalls(Toc);

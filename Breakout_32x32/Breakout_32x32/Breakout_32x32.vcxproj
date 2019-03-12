@@ -81,6 +81,7 @@
     <ClInclude Include="Ball.h" />
     <ClInclude Include="Break.h" />
     <ClInclude Include="Breaks.h" />
+    <ClInclude Include="Char_Bitmap.h" />
     <ClInclude Include="General.h" />
     <ClInclude Include="Globe.h" />
     <ClInclude Include="Globe_Data.h" />
@@ -96,6 +97,7 @@
     <ClCompile Include="Break.cpp" />
     <ClCompile Include="Breakout_32x32.ino" />
     <ClCompile Include="Breaks.cpp" />
+    <ClCompile Include="General.cpp" />
     <ClCompile Include="Globe.cpp" />
     <ClCompile Include="Led_Matrix.cpp" />
     <ClCompile Include="Display.cpp" />

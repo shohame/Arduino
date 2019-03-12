@@ -8,6 +8,19 @@
 #define DIG_HEIGHT	5
 
 
+typedef struct Line_Bit
+{
+	char b0:1;
+	char b1:1;
+	char b2:1;
+	char b3:1;
+	char b4:1;
+	char b5:1;
+	char b6:1;
+	char b7:1;
+
+}Line_Bit;
+
 
 class Display
 {
