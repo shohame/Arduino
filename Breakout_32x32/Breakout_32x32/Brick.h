@@ -18,24 +18,22 @@ typedef struct stLoc_name
 #define	BREAK_DEFAULT_HEIGHT	2
 
 
-
-
-class Break
+class Brick
 {
 
 public:
 
 	stLoc m_Loc_s;	
 
-	Break(void);
-	Break(char a_x, char a_y, char a_w, char a_h);
-	~Break(void);
+	Brick(void);
+	Brick(char a_x, char a_y, char a_w, char a_h);
+	~Brick(void);
 
 	void SetPos(char a_x, char a_y);
-	char WhereBreakTouchMe (Break * a_pBreak, float* a_pD);
+	char WhereBrickTouchMe (Brick * a_pBrick, float* a_pD);
 	void SetLoc(char a_x, char a_y, char a_w, char a_h);
 
-	void MarkBreakOnMatrix();
+	void MarkBrickOnMatrix();
 
 };
 

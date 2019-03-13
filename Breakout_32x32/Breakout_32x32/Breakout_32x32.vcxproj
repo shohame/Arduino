@@ -79,8 +79,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ball.h" />
-    <ClInclude Include="Break.h" />
-    <ClInclude Include="Breaks.h" />
+    <ClInclude Include="Brick.h" />
+    <ClInclude Include="Bricks.h" />
     <ClInclude Include="Char_Bitmap.h" />
     <ClInclude Include="General.h" />
     <ClInclude Include="Globe.h" />
@@ -94,9 +94,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Ball.cpp" />
-    <ClCompile Include="Break.cpp" />
+    <ClCompile Include="Brick.cpp" />
     <ClCompile Include="Breakout_32x32.ino" />
-    <ClCompile Include="Breaks.cpp" />
+    <ClCompile Include="Bricks.cpp" />
     <ClCompile Include="General.cpp" />
     <ClCompile Include="Globe.cpp" />
     <ClCompile Include="Led_Matrix.cpp" />

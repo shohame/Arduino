@@ -36,7 +36,7 @@ void Ball::ChangeAngleBy(float a_dAngle)
 }
 
 
-char Ball::Where_I_TouchStick (Break * a_pStick)
+char Ball::Where_I_TouchStick (Brick * a_pStick)
 {
 	stLoc	Y_Loc = a_pStick->m_Loc_s;
 	stLoc	M_Loc = m_Loc_s;
@@ -67,14 +67,14 @@ char Ball::Where_I_TouchStick (Break * a_pStick)
 	return -1;
 }
 
-char Ball::FindBallCollision(Break a_Break_arr[], char a_BreakCount)
+char Ball::FindBallCollision(Brick a_Brick_arr[], char a_BrickCount)
 {
 	char i = -1;
 	char isTuching;
 	float D;
-	for (i=0; i<a_BreakCount; i++)
+	for (i=0; i<a_BrickCount; i++)
 	{
-		isTuching = WhereBreakTouchMe(&a_Break_arr[i], &D);
+		isTuching = WhereBrickTouchMe(&a_Brick_arr[i], &D);
 		if (isTuching > 0)
 		{
 			Bounce(isTuching, D);

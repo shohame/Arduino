@@ -7,36 +7,36 @@
 #define MAX_NUM_OF_WALLS		(5)
 
 
-class Breaks
+class Bricks
 {
 public:
-	Breaks(void);
-	~Breaks(void);
+	Bricks(void);
+	~Bricks(void);
 
 	Display	m_Score;
 
-	char	m_BreakCount;
-	Break	m_Break_arr[MAX_NUM_OF_BREAKS];
+	char	m_BrickCount;
+	Brick	m_Brick_arr[MAX_NUM_OF_BREAKS];
 
 	char	m_BallCount;
 	Ball	m_Ball_arr[MAX_NUM_OF_BALLS];
 
 	char	m_WallCount;
-	Break	m_Wall_arr[MAX_NUM_OF_WALLS];
+	Brick	m_Wall_arr[MAX_NUM_OF_WALLS];
 	
 	Stick	m_Stick;
 
-	void AddBreak(char a_x, char a_y);
+	void AddBrick(char a_x, char a_y);
 	void AddBall(char a_x, char a_y, float a_Vx, float a_Vy );
 	void AddWall(char a_x, char a_y, char a_w, char a_h);
 
-	void RemoveBreak(char a_BreakIdx);
+	void RemoveBrick(char a_BrickIdx);
 	void RemoveBall(char a_BallIndex);
 	void RemoveWall(char a_WallIndex);
 	void MoveAllBalls(int a_dT_mSec);
-	void MarkBreaksOnMatrix();
+	void MarkBricksOnMatrix();
 
-	void ClearAllBreaksBallsWalls();
+	void ClearAllBricksBallsWalls();
 
 	void InitLevel_1();
 	void InitLevel_dummy();

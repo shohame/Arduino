@@ -8,49 +8,52 @@
 #include "Stick.h"
 #include "Ball.h"
 #include "Display.h"
-#include "Breaks.h"
+#include "Bricks.h"
 #include "UI_Input.h"
+#include "Globe.h"
 
 
-
-Breaks g_Breaks;
+Bricks g_Bricks;
 UI_Input g_UI_In;
 
 void setup()
 {
+
 	SERIAL_BEGIN(9600);
 	DELAY(1000);
 	LM_Setup();
-	g_Breaks.InitLevel_1();
-	g_Breaks.m_Score.ResetGame();
+	g_Bricks.InitLevel_1();
+	g_Bricks.m_Score.ResetGame();
 	LM_Clear();
-	g_Breaks.MarkBreaksOnMatrix();
-	g_Breaks.m_Score.MarkOnMatrix(0);
+	Draw_Globe();
+	LM_Clear();
+	g_Bricks.MarkBricksOnMatrix();
+	g_Bricks.m_Score.MarkOnMatrix(0);
 	LM_PC_DSP_Display_Matrix();
- TICmS();
+	TIC_mS();
 }
 int DDD=0;
 void loop()
 {
-  unsigned long Toc = TOCmS();
-  TICmS();
- //Serial.println(TOCmS());
+  unsigned long Toc = TOC_mS();
+  TIC_mS();
+ //Serial.println(TOC_mS());
   
   
-	g_Breaks.MoveAllBalls(Toc);
+	g_Bricks.MoveAllBalls(Toc);
 
-  LM_Clear();
-	g_Breaks.MarkBreaksOnMatrix();
-	g_Breaks.m_Score.MarkOnMatrix(Toc);
+	LM_Clear();
+	g_Bricks.MarkBricksOnMatrix();
+	g_Bricks.m_Score.MarkOnMatrix(Toc);
 	LM_PC_DSP_Display_Matrix();
 
-	if (g_Breaks.m_BallCount==0)
+	if (g_Bricks.m_BallCount==0)
 	{
-      g_Breaks.AddBall(16,28, 3, -6.0);
+      g_Bricks.AddBall(16,28, 3, -6.0);
 
-      g_Breaks.AddBall(16,28, 4, -5.0);
+      g_Bricks.AddBall(16,28, 4, -5.0);
 
-      g_Breaks.AddBall(16,28, -3, -6.0);
+      g_Bricks.AddBall(16,28, -3, -6.0);
 
 
 	}
@@ -60,9 +63,9 @@ void loop()
 	g_UI_In.GetKeyStatus(&P1_s, &P2_s);
 
 	if ( P1_s.m_R)
-		g_Breaks.m_Stick.m_Loc_s.m_X += 1;
+		g_Bricks.m_Stick.m_Loc_s.m_X += 1;
 	if (  P1_s.m_L)
-		g_Breaks.m_Stick.m_Loc_s.m_X -= 1;
+		g_Bricks.m_Stick.m_Loc_s.m_X -= 1;
 
 }
 #ifdef WIN32	

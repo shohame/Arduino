@@ -2,7 +2,7 @@
 #define __STICK_H
 
 #include "General.h"
-#include "Break.h"
+#include "Brick.h"
 
 #define	STICK_DEFAULT_WIDTH		7
 #define	STICK_DEFAULT_HEIGHT	1
@@ -12,7 +12,7 @@
 
 
 
-class Stick :public Break
+class Stick :public Brick
 {
 public:
 	Stick(void);

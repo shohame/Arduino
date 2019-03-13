@@ -27,12 +27,6 @@
     <ClInclude Include="Globe.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Break.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Breaks.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Ball.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -57,18 +51,18 @@
     <ClInclude Include="Char_Bitmap.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Brick.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Bricks.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Led_Matrix.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Break.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Breaks.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Ball.cpp">
@@ -90,6 +84,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="General.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Brick.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Bricks.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

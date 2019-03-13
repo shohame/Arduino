@@ -2,7 +2,7 @@
 #define __BALL_H
 
 #include "General.h"
-#include "Break.h"
+#include "Brick.h"
 
 #define	BALL_DEFAULT_WIDTH	2
 #define	BALL_DEFAULT_HEIGHT	2
@@ -10,7 +10,7 @@
 #define MAX_ANGLE (75)
 
 
-class Ball :public Break
+class Ball :public Brick
 {
 public:
 	Ball(void);
@@ -21,8 +21,8 @@ public:
 	void SetSpeed(stVector* a_pV);
 	void SetSpeed(float a_Vx, float a_Vy);
 
-	char FindBallCollision(Break a_Break_arr[], char a_BreakCount);
-	char Where_I_TouchStick (Break * a_pBreak);
+	char FindBallCollision(Brick a_Brick_arr[], char a_BrickCount);
+	char Where_I_TouchStick (Brick * a_pBrick);
 	void ChangeAngleBy(float a_dAngle);
 
 

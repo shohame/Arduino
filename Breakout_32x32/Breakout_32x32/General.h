@@ -17,18 +17,19 @@ extern unsigned long g_Tic;
 	#define SERIAL_BEGIN(F)
 	#define SERIAL_PRINT(F) 
 	#define SERIAL_PRINTLN(F) 
-	#define TICmS()   g_Tic = clock()
-	#define TOCmS()   (clock()-g_Tic)
+	#define TIC_mS()   g_Tic = clock()
+	#define TOC_mS()   (clock()-g_Tic)
 	#define DELAY(a) Sleep(a)
 	#define PROGMEM
+	#define pgm_read_word_near(A) (*A)
 #else
 	#define SERIAL_BEGIN(F) Serial.begin(F)
 	#define SERIAL_PRINT(F) Serial.print(F)
 	#define SERIAL_PRINTLN(F) Serial.println(F)
 	#include <Arduino.h>
 	#define DELAY(a) delay(a)
-	#define TICmS()   g_Tic=millis()
-	#define TOCmS()   (millis()-g_Tic)
+	#define TIC_mS()   g_Tic=millis()
+	#define TOC_mS()   (millis()-g_Tic)
 #endif
 
 
