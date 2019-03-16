@@ -37,7 +37,7 @@ public:
 	void MarkBricksOnMatrix();
 	
 	void ClearAllBricksBallsWalls();
-
+	void AddLineOfBricks(char a_x0, char a_y0, char a_Count);
 	void InitLevel(char a_Level);
 
 

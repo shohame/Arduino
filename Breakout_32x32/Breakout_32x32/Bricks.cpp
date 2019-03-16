@@ -168,6 +168,15 @@ void Bricks::InitLeve_Clear()
 	AddWall(24,0,1, 6);		// Score / Life divader 
 }
 
+void Bricks::AddLineOfBricks(char a_x0, char a_y0, char a_Count)
+{
+	for(char x=0; x<a_Count; x++)
+	{
+		AddBrick(a_x0 + x*(BREAK_DEFAULT_WIDTH+1), a_y0);
+	}
+}
+
+
 void Bricks::InitLevel(char a_Level)
 {
 	char line, x;
@@ -176,39 +185,26 @@ void Bricks::InitLevel(char a_Level)
 	InitLeve_Clear();
 	switch(a_Level)
 	{
-		case 1:
-		case 2:
-			 for (line=0; line<(2*a_Level); line++)
-			 {
-				Nx = 8 - (line & 1);	// first line (top) 8; next line 7; and so on!
-				X0 = 0 + (line & 1)*2;	// first line (top) 0; next line 2; and so on! 
+	case 1:
+		AddLineOfBricks(0, 8,  8);
+		AddLineOfBricks(2, 11, 7);
+		break;	
+	case 2:
+		AddLineOfBricks(0, 8,  8);
+		AddLineOfBricks(2, 11, 7);
+		AddLineOfBricks(0, 14,  8);
+		AddLineOfBricks(2, 17,  7);
+		break;
+	case 3:
+		AddLineOfBricks(0, 8,  8);
+		AddLineOfBricks(2, 11, 7);
 
-				for(x=0; x<Nx; x++)
-				{
-					AddBrick(X0 + x*(BREAK_DEFAULT_WIDTH+1), 8 + line*(BREAK_DEFAULT_HEIGHT+1));
-				}
-			 }	
-			 break;
-		case 3:
-			 for (line=0; line<2; line++)
-			 {
-				Nx = 8 - (line & 1);	// first line (top) 8; next line 7; and so on!
-				X0 = 0 + (line & 1)*2;	// first line (top) 0; next line 2; and so on! 
-
-				for(x=0; x<Nx; x++)
-				{
-					AddBrick(X0 + x*(BREAK_DEFAULT_WIDTH+1), 8 + line*(BREAK_DEFAULT_HEIGHT+1));
-				}
-			 }
-			AddWall(0, 16, 17, 1);	
-			AddWall(22 ,16,6 , 1);	
-			AddWall(0, 23, 9, 1);	
-			AddWall(15, 23, 13, 1);	
-				
-				
-
+		AddWall(0, 16, 17, 1);	
+		AddWall(22 ,16,6 , 1);	
+		AddWall(0, 23, 9, 1);	
+		AddWall(15, 23, 13, 1);	
 	}
 	AddBall(16,28, 3, -6.0);
-	
+
 }
 
