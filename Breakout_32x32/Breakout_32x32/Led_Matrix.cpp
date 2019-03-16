@@ -1,4 +1,4 @@
-
+﻿
 #include "stdafx.h"
 #include "General.h"
 #include "LED_Matrix.h"
@@ -123,11 +123,11 @@ void LM_PC_DSP_Display_Matrix()
 		{
 			if (LM_GetPoint(x, y))
 			{
-				printf("#");
+				printf("@");
 			}
 			else
 			{
-				printf(".");
+				printf("-");
 			}
 		}
 		printf("\n");

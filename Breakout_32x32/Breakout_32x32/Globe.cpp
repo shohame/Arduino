@@ -50,7 +50,7 @@ void Draw_Globe()
 		{
 			CopyImage2LedStatus((unsigned char*)g_LedStatus[i]);
 			LM_PC_DSP_Display_Matrix();
-			DELAY(200);
+			DELAY(50);
 		}
 	}
 }

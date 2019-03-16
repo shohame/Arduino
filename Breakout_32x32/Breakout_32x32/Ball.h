@@ -6,6 +6,7 @@
 
 #define	BALL_DEFAULT_WIDTH	2
 #define	BALL_DEFAULT_HEIGHT	2
+#define	BALL_DEFAULT_ACCSELERATION	30  // mili Percent / Sec
 
 #define MAX_ANGLE (75)
 
@@ -16,6 +17,10 @@ public:
 	Ball(void);
 	~Ball(void);
 	stVector   m_V_s;		// velocity
+	char m_Acceleration;	// +10 percent for each 100 sec 
+
+
+
 	void Bounce(char a_Direction, float a_Depth );
 	void MoveBall(int a_dT_mSec);
 	void SetSpeed(stVector* a_pV);

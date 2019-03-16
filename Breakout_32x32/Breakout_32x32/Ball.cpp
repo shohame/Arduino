@@ -5,6 +5,7 @@
 
 Ball::Ball(void)
 {
+	m_Acceleration = BALL_DEFAULT_ACCSELERATION;
 	m_Loc_s.m_w = BALL_DEFAULT_WIDTH;
 	m_Loc_s.m_h = BALL_DEFAULT_HEIGHT;
 }
@@ -101,7 +102,14 @@ void Ball::MoveBall(int a_dT_mSec)
 {
 	m_Loc_s.m_X +=  m_V_s.m_X * a_dT_mSec / 1000.0;
 	m_Loc_s.m_Y +=  m_V_s.m_Y * a_dT_mSec / 1000.0;
+
+
+	float SpeedFactor = 1.0 + ((float)m_Acceleration) * a_dT_mSec / 1000.0 / 1000.0;
+
+	m_V_s.m_X *= SpeedFactor;
+	m_V_s.m_Y *= SpeedFactor;
 }
+
 
 void Ball::Bounce(char a_Direction, float a_Depth = 0)
 {

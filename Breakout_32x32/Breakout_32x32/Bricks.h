@@ -4,7 +4,7 @@
 
 #define MAX_NUM_OF_BREAKS	((8)*4)
 #define MAX_NUM_OF_BALLS		(3)
-#define MAX_NUM_OF_WALLS		(5)
+#define MAX_NUM_OF_WALLS		(15)
 
 
 class Bricks
@@ -13,7 +13,7 @@ public:
 	Bricks(void);
 	~Bricks(void);
 
-	Display	m_Score;
+	Display	m_Disply;
 
 	char	m_BrickCount;
 	Brick	m_Brick_arr[MAX_NUM_OF_BREAKS];
@@ -35,10 +35,13 @@ public:
 	void RemoveWall(char a_WallIndex);
 	void MoveAllBalls(int a_dT_mSec);
 	void MarkBricksOnMatrix();
-
+	
 	void ClearAllBricksBallsWalls();
 
-	void InitLevel_1();
-	void InitLevel_dummy();
+	void InitLevel(char a_Level);
+
+
+private:
+	void InitLeve_Clear();
 };
 #endif // #ifndef __BREAKS_H

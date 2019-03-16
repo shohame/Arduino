@@ -15,6 +15,18 @@
 
 Bricks g_Bricks;
 UI_Input g_UI_In;
+int Level = 1;
+
+void RestartGame()
+{
+	Level = 0;
+	g_Bricks.m_Disply.ResetGame();
+	g_Bricks.ClearAllBricksBallsWalls();
+	LM_Clear();
+	TIC_mS();
+}
+
+
 
 void setup()
 {
@@ -22,41 +34,52 @@ void setup()
 	SERIAL_BEGIN(9600);
 	DELAY(1000);
 	LM_Setup();
-	g_Bricks.InitLevel_1();
-	g_Bricks.m_Score.ResetGame();
-	LM_Clear();
 	Draw_Globe();
-	LM_Clear();
-	g_Bricks.MarkBricksOnMatrix();
-	g_Bricks.m_Score.MarkOnMatrix(0);
-	LM_PC_DSP_Display_Matrix();
-	TIC_mS();
+	LM_Setup();
+	RestartGame();
+
 }
 int DDD=0;
+
+
 void loop()
 {
-  unsigned long Toc = TOC_mS();
-  TIC_mS();
- //Serial.println(TOC_mS());
-  
+	unsigned long Toc = TOC_mS();
+
+  	if (g_Bricks.m_BrickCount == 0)
+	{
+		DELAY(500);
+		Level ++;
+		g_Bricks.InitLevel(Level);
+	}
+	if (g_Bricks.m_BallCount==0)
+	{
+		DELAY(500);
+
+		
+
+		if (g_Bricks.m_Disply.m_Life == 0) // Game Over
+		{
+			DELAY(1000);		
+			RestartGame();
+		}
+		else
+		{
+			g_Bricks.m_Disply.m_Life--;
+			g_Bricks.AddBall(16,28, 3, -6.0);
+		}
+ 	}
+
+	TIC_mS();
   
 	g_Bricks.MoveAllBalls(Toc);
 
 	LM_Clear();
 	g_Bricks.MarkBricksOnMatrix();
-	g_Bricks.m_Score.MarkOnMatrix(Toc);
+	g_Bricks.m_Disply.MarkOnMatrix(Toc);
 	LM_PC_DSP_Display_Matrix();
 
-	if (g_Bricks.m_BallCount==0)
-	{
-      g_Bricks.AddBall(16,28, 3, -6.0);
 
-      g_Bricks.AddBall(16,28, 4, -5.0);
-
-      g_Bricks.AddBall(16,28, -3, -6.0);
-
-
-	}
 	
 	stKeyStatus P1_s, P2_s;
 

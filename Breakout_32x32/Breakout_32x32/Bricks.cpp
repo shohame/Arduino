@@ -22,10 +22,12 @@ void Bricks::MarkBricksOnMatrix()
 	{
 		m_Brick_arr[i].MarkBrickOnMatrix();
 	}
+
 	for (i=0; i<m_BallCount; i++)
 	{
 		m_Ball_arr[i].MarkBrickOnMatrix();
 	}
+
 	for (i=0; i<m_WallCount; i++)
 	{
 		m_Wall_arr[i].MarkBrickOnMatrix();
@@ -35,9 +37,6 @@ void Bricks::MarkBricksOnMatrix()
 }
 
 
-
-
-
 void Bricks::MoveAllBalls(int a_dT_mSec)
 {
 	char i,j;
@@ -45,7 +44,8 @@ void Bricks::MoveAllBalls(int a_dT_mSec)
 	char BrickID;
 	char isTuching;
 	Ball *pBall;
-
+	if (a_dT_mSec>100)
+		a_dT_mSec = 100;
 	for (i=0; i<m_BallCount; i++)
 	{
 		pBall = &m_Ball_arr[i];
@@ -67,7 +67,7 @@ void Bricks::MoveAllBalls(int a_dT_mSec)
 		if (BrickID>=0)
 		{
 			RemoveBrick(BrickID);	// Remove just if BrickID>=0 !
-			m_Score.AddScore(125);
+			m_Disply.AddScore(125);
 		}
 		pBall->Where_I_TouchStick(&m_Stick);
 	}
@@ -81,7 +81,6 @@ void Bricks::MoveAllBalls(int a_dT_mSec)
 			i--;			// To chack the index again, if we have copyed the last that need to be deleted !!!
 		}
 	}
-
 }
 
 
@@ -133,7 +132,7 @@ void Bricks::RemoveBrick(char a_BrickIdx)
 
 	if ( (a_BrickIdx >= 0) && (a_BrickIdx < m_BrickCount) )
 	{
-		m_Brick_arr[a_BrickIdx].m_Loc_s = m_Brick_arr[m_BrickCount-1].m_Loc_s;;
+		m_Brick_arr[a_BrickIdx] = m_Brick_arr[m_BrickCount-1];
 		m_BrickCount--;
 	}
 }
@@ -143,8 +142,8 @@ void Bricks::RemoveBall(char a_BallIndex)
 	assert((a_BallIndex >= 0) && (a_BallIndex < m_BallCount));
 	if (a_BallIndex<m_BallCount)
 	{
-		m_Ball_arr[a_BallIndex].m_Loc_s = m_Ball_arr[m_BallCount-1].m_Loc_s;
-		m_Ball_arr[a_BallIndex].m_V_s = m_Ball_arr[m_BallCount-1].m_V_s;
+		m_Ball_arr[a_BallIndex] = m_Ball_arr[m_BallCount-1];
+//		m_Ball_arr[a_BallIndex].m_V_s = m_Ball_arr[m_BallCount-1].m_V_s;
 		m_BallCount--;
 	}
 }
@@ -159,53 +158,57 @@ void Bricks::RemoveWall(char a_WallIndex)
 	}
 }
 
+void Bricks::InitLeve_Clear()
+{
+	ClearAllBricksBallsWalls();
 
-void Bricks::InitLevel_1()
+	AddWall(32,-1, 1, 34);	// Right wall
+	AddWall(-1,-1, 1, 34);	// Left wall
+	AddWall(0,6,32, 1);		// Top wall
+	AddWall(24,0,1, 6);		// Score / Life divader 
+}
+
+void Bricks::InitLevel(char a_Level)
 {
 	char line, x;
 	char Nx, X0;
 
-	ClearAllBricksBallsWalls();
+	InitLeve_Clear();
+	switch(a_Level)
+	{
+		case 1:
+		case 2:
+			 for (line=0; line<(2*a_Level); line++)
+			 {
+				Nx = 8 - (line & 1);	// first line (top) 8; next line 7; and so on!
+				X0 = 0 + (line & 1)*2;	// first line (top) 0; next line 2; and so on! 
 
+				for(x=0; x<Nx; x++)
+				{
+					AddBrick(X0 + x*(BREAK_DEFAULT_WIDTH+1), 8 + line*(BREAK_DEFAULT_HEIGHT+1));
+				}
+			 }	
+			 break;
+		case 3:
+			 for (line=0; line<2; line++)
+			 {
+				Nx = 8 - (line & 1);	// first line (top) 8; next line 7; and so on!
+				X0 = 0 + (line & 1)*2;	// first line (top) 0; next line 2; and so on! 
 
+				for(x=0; x<Nx; x++)
+				{
+					AddBrick(X0 + x*(BREAK_DEFAULT_WIDTH+1), 8 + line*(BREAK_DEFAULT_HEIGHT+1));
+				}
+			 }
+			AddWall(0, 16, 17, 1);	
+			AddWall(22 ,16,6 , 1);	
+			AddWall(0, 23, 9, 1);	
+			AddWall(15, 23, 13, 1);	
+				
+				
+
+	}
 	AddBall(16,28, 3, -6.0);
-// 	AddBall(16,27, -0.0, 5.0);
-// 	AddBall(16,27, -1.0, 4.0);
- //	AddBall(16,27, -2.0, 3.0);
-
-	AddWall(32,-1, 1, 34);
-	AddWall(-1,-1, 1, 34);
-	AddWall(0,6,32, 1);
-	AddWall(24,0,1, 6);
-	AddWall(-1,32, 34,1); // need to remove this !!!
-
-	 for (line=0; line<4; line++)
-	 {
-		Nx = 8 - (line & 1);	// first line (top) 8; next line 7; and so on!
-		X0 = 0 + (line & 1)*2;	// first line (top) 0; next line 2; and so on! 
-
-		for(x=0; x<Nx; x++)
-		{
-			AddBrick(X0 + x*(BREAK_DEFAULT_WIDTH+1), 8 + line*(BREAK_DEFAULT_HEIGHT+1));
-		}
-	 }
+	
 }
-void Bricks::InitLevel_dummy()
-{
-	char line, x;
-	char Nx, X0;
 
-	ClearAllBricksBallsWalls();
-
-
-	AddBall(16,28, 3, -6.0);
-// 	AddBall(16,27, -0.0, 5.0);
-// 	AddBall(16,27, -1.0, 4.0);
- //	AddBall(16,27, -2.0, 3.0);
-
-	AddWall(27,-1, 2, 34);		// Right
-	AddWall(3,-1, 2, 34);		// Left
-	AddWall(0,6,32, 2);			// Top
-	AddWall(-1,32, 34,1); // need to remove this !!!
-
-}
