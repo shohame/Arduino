@@ -12,7 +12,7 @@
 
 
 
-class Stick :public Brick
+class Stick : public Brick
 {
 public:
 	Stick(void);

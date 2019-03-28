@@ -11,7 +11,7 @@
 #define MAX_ANGLE (75)
 
 
-class Ball :public Brick
+class Ball : public Brick
 {
 public:
 	Ball(void);

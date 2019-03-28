@@ -82,7 +82,7 @@ void Display::MarkOnMatrix(int a_dT)
 	}
 	y0 = 0;
 	x0 = 27;
-  Di = m_Life;
+	Di = m_Life;
 	for(char y=0; y<DIG_HEIGHT; y++)
 	{
 		for(char x=0; x<DIG_WIDTH; x++)

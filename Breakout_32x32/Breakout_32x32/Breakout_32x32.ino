@@ -7,6 +7,7 @@
 #include "Ball.h"
 #include "Stick.h"
 #include "Ball.h"
+#include "Price.h"
 #include "Display.h"
 #include "Bricks.h"
 #include "UI_Input.h"
@@ -34,7 +35,7 @@ void setup()
 	SERIAL_BEGIN(9600);
 	DELAY(1000);
 	LM_Setup();
-	Draw_Globe();
+//	Draw_Globe();
 	LM_Setup();
 	RestartGame();
 
@@ -73,6 +74,7 @@ void loop()
 	TIC_mS();
   
 	g_Bricks.MoveAllBalls(Toc);
+	g_Bricks.MoveAllPrices(Toc);
 
 	LM_Clear();
 	g_Bricks.MarkBricksOnMatrix();

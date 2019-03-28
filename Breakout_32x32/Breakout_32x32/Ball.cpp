@@ -64,8 +64,9 @@ char Ball::Where_I_TouchStick (Brick * a_pStick)
 
 		float dAngle = 45 * (M_Cx - Y_Cx) / Y_half_w;
 		ChangeAngleBy(dAngle);
+		return 1;
 	}
-	return -1;
+	return 0;
 }
 
 char Ball::FindBallCollision(Brick a_Brick_arr[], char a_BrickCount)
@@ -102,7 +103,6 @@ void Ball::MoveBall(int a_dT_mSec)
 {
 	m_Loc_s.m_X +=  m_V_s.m_X * a_dT_mSec / 1000.0;
 	m_Loc_s.m_Y +=  m_V_s.m_Y * a_dT_mSec / 1000.0;
-
 
 	float SpeedFactor = 1.0 + ((float)m_Acceleration) * a_dT_mSec / 1000.0 / 1000.0;
 

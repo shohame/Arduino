@@ -2,11 +2,10 @@
 #define __SCORE_H
 
 
-
-#define NUM_OF_DIG	10
+#define NUM_OF_PRICE 4
+#define NUM_OF_DIG	(10 + NUM_OF_PRICE)
 #define DIG_WIDTH	3
 #define DIG_HEIGHT	5
-
 
 typedef struct Line_Bit
 {
@@ -21,6 +20,7 @@ typedef struct Line_Bit
 
 }Line_Bit;
 
+extern const   Line_Bit  Digit_arr[NUM_OF_DIG][DIG_HEIGHT];
 
 class Display
 {

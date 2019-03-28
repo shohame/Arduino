@@ -1,6 +1,7 @@
 #include "StdAfx.h"
 #include "Brick.h"
 #include "Ball.h"
+#include "Price.h"
 #include "Stick.h"
 #include "Display.h"
 #include "Bricks.h"
@@ -33,19 +34,20 @@ void Bricks::MarkBricksOnMatrix()
 		m_Wall_arr[i].MarkBrickOnMatrix();
 	}
 
+	for (i=0; i<m_PriceCount; i++)
+	{
+		m_Price_arr[i].MarkBrickOnMatrix();
+	}
+
 	m_Stick.MarkBrickOnMatrix();
 }
 
 
 void Bricks::MoveAllBalls(int a_dT_mSec)
 {
-	char i,j;
-	float D;
-	char BrickID;
-	char isTuching;
+	char i, BrickID;
 	Ball *pBall;
-	if (a_dT_mSec>100)
-		a_dT_mSec = 100;
+
 	for (i=0; i<m_BallCount; i++)
 	{
 		pBall = &m_Ball_arr[i];
@@ -58,7 +60,8 @@ void Bricks::MoveAllBalls(int a_dT_mSec)
 
 		if (pBall->m_Loc_s.m_Y >= 30)
 		{
-			pBall->SetPos(-100, -100); // -100 indicate it's need to be deleted
+			RemoveBall(i);
+			i--;		// We moveed the last index to index i, so we need to go back to index i !!!
 			continue;
 		}
 
@@ -66,23 +69,59 @@ void Bricks::MoveAllBalls(int a_dT_mSec)
 		BrickID = pBall->FindBallCollision(m_Brick_arr, m_BrickCount);
 		if (BrickID>=0)
 		{
+			AddPrice(m_Brick_arr[BrickID].m_Loc_s.m_X, (m_Brick_arr[BrickID].m_Loc_s.m_Y));
 			RemoveBrick(BrickID);	// Remove just if BrickID>=0 !
 			m_Disply.AddScore(125);
 		}
 		pBall->Where_I_TouchStick(&m_Stick);
 	}
+}
+void Bricks::MoveAllPrices(int a_dT_mSec)
+{
+	char i;
+	Price *pPrice;
 
-	for (i=0; i<m_BallCount; i++)
+	for (i=0; i<m_PriceCount; i++)
 	{
-		pBall = &m_Ball_arr[i];
-		if (pBall->m_Loc_s.m_X < -99)		
+		pPrice = &m_Price_arr[i];
+
+		pPrice->MoveBall(a_dT_mSec);
+
+		if (pPrice->m_Loc_s.m_Y >= 30)
 		{
-			RemoveBall(i);
-			i--;			// To chack the index again, if we have copyed the last that need to be deleted !!!
+			RemovePrice(i);
+			i--;		// We moveed the last index to index i, so we need to go back to index i !!!
+			continue;
+		}
+
+		if (pPrice->Where_I_TouchStick(&m_Stick))
+		{	
+			if(pPrice->m_eType == eLarge)
+			{
+				m_Stick.m_Loc_s.m_w = STICK_DEFAULT_WIDTH + 2;
+			}
+			if(pPrice->m_eType == eSmall)
+			{
+				m_Stick.m_Loc_s.m_w = STICK_DEFAULT_WIDTH - 2;
+			}
+			if(pPrice->m_eType == eThree)
+			{
+				AddBall(pPrice->m_Loc_s.m_X, pPrice->m_Loc_s.m_Y, 2, -4	);
+				AddBall(pPrice->m_Loc_s.m_X, pPrice->m_Loc_s.m_Y, -2, -3	);
+				AddBall(pPrice->m_Loc_s.m_X, pPrice->m_Loc_s.m_Y, 0, -7	);
+			}
+			if(pPrice->m_eType == eBall)
+			{
+				m_Disply.m_Life++;
+			}
+			RemovePrice(i);
+			i--;
+			continue;
 		}
 	}
-}
 
+
+}
 
 void Bricks::ClearAllBricksBallsWalls()
 {
@@ -125,6 +164,21 @@ void Bricks::AddWall(char a_x, char a_y, char a_w, char a_h)
 	}
 }
 
+void Bricks::AddPrice(char a_x, char a_y)
+{
+	Price* pPrice;
+//	assert(m_PriceCount < MAX_NUM_OF_PRICE);
+	if (m_PriceCount < MAX_NUM_OF_PRICE)
+	{
+		pPrice = &m_Price_arr[m_PriceCount];
+		pPrice->SetPos(a_x, a_y);
+		pPrice->m_V_s.m_X = 0;
+		pPrice->m_V_s.m_Y = PRICE_DEFAULT_SPEED;
+		pPrice->m_eType =(ePriceType) ( (int)eLarge +  (rand() % PRICE_TYPE_COUNT));
+		m_PriceCount++;
+	}
+}
+
 
 void Bricks::RemoveBrick(char a_BrickIdx)
 {
@@ -143,7 +197,6 @@ void Bricks::RemoveBall(char a_BallIndex)
 	if (a_BallIndex<m_BallCount)
 	{
 		m_Ball_arr[a_BallIndex] = m_Ball_arr[m_BallCount-1];
-//		m_Ball_arr[a_BallIndex].m_V_s = m_Ball_arr[m_BallCount-1].m_V_s;
 		m_BallCount--;
 	}
 }
@@ -155,6 +208,16 @@ void Bricks::RemoveWall(char a_WallIndex)
 	{
 		m_Wall_arr[a_WallIndex].m_Loc_s = m_Wall_arr[m_WallCount-1].m_Loc_s;
 		m_WallCount--;
+	}
+}
+
+void Bricks::RemovePrice(char a_PriceIndex)
+{
+	assert((a_PriceIndex >= 0) && (a_PriceIndex < m_PriceCount));
+	if (a_PriceIndex<m_PriceCount)
+	{
+		m_Price_arr[a_PriceIndex] = m_Price_arr[m_PriceCount-1];
+		m_PriceCount--;
 	}
 }
 
@@ -204,6 +267,7 @@ void Bricks::InitLevel(char a_Level)
 		AddWall(0, 23, 9, 1);	
 		AddWall(15, 23, 13, 1);	
 	}
+
 	AddBall(16,28, 3, -6.0);
 
 }
