@@ -7,6 +7,7 @@
 #define MAX_NUM_OF_WALLS		(15)
 #define MAX_NUM_OF_PRICE		(5)
 
+#define GIVE_PRICE_RATE		5  // for each 5 bricks give 1 price
 
 class Bricks
 {
@@ -41,7 +42,7 @@ public:
 	void RemovePrice(char a_PriceIndex);
 	void MoveAllBalls(int a_dT_mSec);
 	void MoveAllPrices(int a_dT_mSec);
-	
+	void GetThePrice(ePriceType a_eType, char a_x, char a_y);
 	void MarkBricksOnMatrix();
 	
 	void ClearAllBricksBallsWalls();

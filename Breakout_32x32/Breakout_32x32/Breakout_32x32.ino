@@ -31,6 +31,7 @@ void RestartGame()
 
 void setup()
 {
+	GET_RAMDOM_SEED();
 
 	SERIAL_BEGIN(9600);
 	DELAY(1000);
@@ -56,9 +57,6 @@ void loop()
 	if (g_Bricks.m_BallCount==0)
 	{
 		DELAY(500);
-
-		
-
 		if (g_Bricks.m_Disply.m_Life == 0) // Game Over
 		{
 			DELAY(1000);		
@@ -68,6 +66,8 @@ void loop()
 		{
 			g_Bricks.m_Disply.m_Life--;
 			g_Bricks.AddBall(16,28, 3, -6.0);
+			g_Bricks.m_Stick.m_Loc_s.m_w = STICK_DEFAULT_WIDTH;
+
 		}
  	}
 

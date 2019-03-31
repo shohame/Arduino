@@ -8,6 +8,7 @@
 	#include <assert.h>
 #endif
 #include <math.h>
+#include <time.h>
 extern unsigned long g_Tic;
 
 #ifdef WIN32
@@ -22,6 +23,9 @@ extern unsigned long g_Tic;
 	#define DELAY(a) Sleep(a)
 	#define PROGMEM
 	#define pgm_read_word_near(A) (*A)
+	#define RAND_INT(F,T) (( rand() % (T-F) ) + F)
+	#define GET_RAMDOM_SEED()	srand(time(NULL))
+
 #else
 	#define SERIAL_BEGIN(F) Serial.begin(F)
 	#define SERIAL_PRINT(F) Serial.print(F)
@@ -30,6 +34,9 @@ extern unsigned long g_Tic;
 	#define DELAY(a) delay(a)
 	#define TIC_mS()   g_Tic=millis()
 	#define TOC_mS()   (millis()-g_Tic)
+	#define RAND_INT(F,T) random(min, max)
+	#define GET_RAMDOM_SEED		randomSeed(analogRead(0))
+
 #endif
 
 
