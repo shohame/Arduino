@@ -3,9 +3,10 @@
 
 
 #define MAX_NUM_OF_BREAKS	((8)*4)
-#define MAX_NUM_OF_BALLS		(20)
-#define MAX_NUM_OF_WALLS		(15)
+#define MAX_NUM_OF_BALLS		(10)
+#define MAX_NUM_OF_WALLS		(10)
 #define MAX_NUM_OF_PRICE		(5)
+#define MAX_NUM_OF_FIRE			(5)
 
 #define GIVE_PRICE_RATE		5  // for each 5 bricks give 1 price
 
@@ -28,7 +29,10 @@ public:
 
 	char	m_PriceCount;
 	Price	m_Price_arr[MAX_NUM_OF_PRICE];
-	
+
+	char	m_FireCount;
+	Fire	m_Fire_arr[MAX_NUM_OF_FIRE];
+
 	Stick	m_Stick;
 
 	void AddBrick(char a_x, char a_y);
@@ -37,12 +41,16 @@ public:
 	void AddPrice(char a_x, char a_y);
 
 	void RemoveBrick(char a_BrickIdx);
-	void RemoveBall(char a_BallIndex);
-	void RemoveWall(char a_WallIndex);
+	void RemoveBall (char a_BallIndex);
+	void RemoveWall (char a_WallIndex);
 	void RemovePrice(char a_PriceIndex);
+	void RemoveFire (char a_FireIndex);
+	
 	void MoveAllBalls(int a_dT_mSec);
 	void MoveAllPrices(int a_dT_mSec);
+	void MoveAllFires(int a_dT_mSec);
 	void GetThePrice(ePriceType a_eType, char a_x, char a_y);
+
 	void MarkBricksOnMatrix();
 	
 	void ClearAllBricksBallsWalls();

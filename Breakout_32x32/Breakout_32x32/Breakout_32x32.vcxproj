@@ -82,6 +82,7 @@
     <ClInclude Include="Brick.h" />
     <ClInclude Include="Bricks.h" />
     <ClInclude Include="Char_Bitmap.h" />
+    <ClInclude Include="Fire.h" />
     <ClInclude Include="General.h" />
     <ClInclude Include="Globe.h" />
     <ClInclude Include="Globe_Data.h" />
@@ -98,6 +99,7 @@
     <ClCompile Include="Brick.cpp" />
     <ClCompile Include="Breakout_32x32.ino" />
     <ClCompile Include="Bricks.cpp" />
+    <ClCompile Include="Fire.cpp" />
     <ClCompile Include="General.cpp" />
     <ClCompile Include="Globe.cpp" />
     <ClCompile Include="Led_Matrix.cpp" />

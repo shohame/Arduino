@@ -2,6 +2,7 @@
 #include "Brick.h"
 #include "Ball.h"
 #include "Price.h"
+#include "Fire.h"
 #include "Stick.h"
 #include "Display.h"
 #include "Bricks.h"
@@ -37,6 +38,11 @@ void Bricks::MarkBricksOnMatrix()
 	for (i=0; i<m_PriceCount; i++)
 	{
 		m_Price_arr[i].MarkBrickOnMatrix();
+	}
+
+	for (i=0; i<m_FireCount; i++)
+	{
+		m_Fire_arr[i].MarkBrickOnMatrix();
 	}
 
 	m_Stick.MarkBrickOnMatrix();
@@ -80,6 +86,34 @@ void Bricks::MoveAllBalls(int a_dT_mSec)
 	}
 }
 
+void Bricks::MoveAllFires(int a_dT_mSec)
+{
+	char i, BrickID;
+	Fire *pFire;
+
+	for (i=0; i<m_FireCount; i++)
+	{
+		pFire = &m_Fire_arr[i];
+
+		pFire->MoveBall(a_dT_mSec);
+
+		BrickID = pFire->FindBallCollision(m_Wall_arr, m_WallCount);
+		BrickID = pFire->FindBallCollision(m_Brick_arr, m_BrickCount);
+		if (BrickID>=0)
+		{
+			if (RAND_INT(0, GIVE_PRICE_RATE) == 0)
+			{
+				AddPrice(m_Brick_arr[BrickID].m_Loc_s.m_X, (m_Brick_arr[BrickID].m_Loc_s.m_Y));
+			}
+			RemoveBrick(BrickID);	// Remove just if BrickID>=0 !
+			RemoveFire(i);
+			i--;
+			m_Disply.AddScore(125);
+		}
+		
+	}
+}
+
 
 
 void Bricks::GetThePrice(ePriceType a_eType, char a_x, char a_y)
@@ -88,12 +122,12 @@ void Bricks::GetThePrice(ePriceType a_eType, char a_x, char a_y)
 	{
 		case(eLarge):
 		{
-			m_Stick.m_Loc_s.m_w = STICK_DEFAULT_WIDTH + 2;
+			m_Stick.ChangeStickType(eStickLarge);
 			break;
 		}
 		case(eSmall):
 		{
-			m_Stick.m_Loc_s.m_w = STICK_DEFAULT_WIDTH - 2;
+			m_Stick.ChangeStickType(eStickSmall);
 			break;
 		}
 		case(eThree):
@@ -107,6 +141,11 @@ void Bricks::GetThePrice(ePriceType a_eType, char a_x, char a_y)
 		{
 			if (m_Disply.m_Life<9)
 				m_Disply.m_Life++;
+			break;
+		}
+		case(eFire):
+		{
+			m_Stick.ChangeStickType(eStickFire);
 			break;
 		}
 	}
@@ -123,11 +162,6 @@ void Bricks::MoveAllPrices(int a_dT_mSec)
 		Remove = false;
 		pPrice->MoveBall(a_dT_mSec);
 
-		if (pPrice->m_Loc_s.m_Y >= 30)
-		{
-			Remove = true;
-		}
-
 		if (pPrice->Where_I_TouchStick(&m_Stick))
 		{	
 			GetThePrice(pPrice->m_eType, pPrice->m_Loc_s.m_X, pPrice->m_Loc_s.m_Y);
@@ -140,8 +174,6 @@ void Bricks::MoveAllPrices(int a_dT_mSec)
 			i--;		// We moveed the last index to index i, so we need to go back to index i !!!
 		}
 	}
-
-
 }
 
 void Bricks::ClearAllBricksBallsWalls()
@@ -243,10 +275,21 @@ void Bricks::RemovePrice(char a_PriceIndex)
 	}
 }
 
+void Bricks::RemoveFire(char a_FireIndex)
+{
+	assert((a_FireIndex >= 0) && (a_FireIndex < m_FireCount));
+	if (a_FireIndex<m_FireCount)
+	{
+		m_Fire_arr[a_FireIndex] = m_Fire_arr[m_FireCount-1];
+		m_FireCount--;
+	}
+}
+
 void Bricks::InitLeve_Clear()
 {
 	ClearAllBricksBallsWalls();
-	m_Stick.m_Loc_s.m_w = STICK_DEFAULT_WIDTH;
+
+	m_Stick.ChangeStickType(eStickRegular);
 
 	AddWall(32,-1, 1, 34);	// Right wall
 	AddWall(-1,-1, 1, 34);	// Left wall
@@ -269,6 +312,7 @@ void Bricks::InitLevel(char a_Level)
 	char Nx, X0;
 
 	InitLeve_Clear();
+
 	switch(a_Level)
 	{
 	case 1:
@@ -283,12 +327,37 @@ void Bricks::InitLevel(char a_Level)
 		break;
 	case 3:
 		AddLineOfBricks(0, 8,  8);
+		AddLineOfBricks(2, 15, 7);
+
+		AddWall(0, 12, 11, 1);	
+		AddWall(21 ,12,11 , 1);	
+		break;
+
+	case 4:
+		AddLineOfBricks(0, 8,  8);
 		AddLineOfBricks(2, 11, 7);
 
 		AddWall(0, 16, 17, 1);	
 		AddWall(22 ,16,6 , 1);	
 		AddWall(0, 23, 9, 1);	
 		AddWall(15, 23, 13, 1);	
+		break;
+	case 5:
+		AddLineOfBricks(0, 8,  8);
+
+		AddBrick(3, 21);
+		AddBrick(26, 21);
+
+		AddWall(0, 13, 12, 1);	
+		AddWall(17, 13, 7, 1);	
+		AddWall(11, 17, 6, 1);	
+		AddWall(0, 21, 3, 2);	
+		AddWall(6, 21, 20, 2);	
+		AddWall(29, 21, 3, 2);	
+
+
+		break;
+
 	}
 
 	AddBall(16,28, 3, -6.0);

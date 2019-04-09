@@ -27,15 +27,16 @@ extern unsigned long g_Tic;
 	#define GET_RAMDOM_SEED()	srand(time(NULL))
 
 #else
+  #include <Arduino.h>
+  #include <avr/pgmspace.h>
 	#define SERIAL_BEGIN(F) Serial.begin(F)
 	#define SERIAL_PRINT(F) Serial.print(F)
 	#define SERIAL_PRINTLN(F) Serial.println(F)
-	#include <Arduino.h>
 	#define DELAY(a) delay(a)
 	#define TIC_mS()   g_Tic=millis()
 	#define TOC_mS()   (millis()-g_Tic)
-	#define RAND_INT(F,T) random(min, max)
-	#define GET_RAMDOM_SEED		randomSeed(analogRead(0))
+	#define RAND_INT(min,max) random(min, max)
+	#define GET_RAMDOM_SEED()		randomSeed(analogRead(0))
 
 #endif
 

@@ -9,15 +9,24 @@
 #define	STICK_DEFAULT_X			13
 #define	STICK_DEFAULT_Y			31
 
+enum eStickType 
+{
+	eStickRegular,
+	eStickLarge,
+	eStickSmall,
+	eStickFire
+};
 
 
 
 class Stick : public Brick
 {
 public:
+	eStickType m_Type;
 	Stick(void);
 	~Stick(void);
-
+	void MarkBrickOnMatrix(void);
+	void ChangeStickType(eStickType a_StickType);
 };
 
 

@@ -8,21 +8,21 @@
 #define	PRICE_DEFAULT_HEIGHT	4
 #define	PRICE_DEFAULT_SPEED		3		// 3 Pixel / Sec
 
-#define		PRICE_TYPE_COUNT  4		
+#define	PRICE_TYPE_COUNT		5		
 
 enum ePriceType 
 {
 	eLarge	= 10,
 	eSmall,
 	eThree,
-	eBall
+	eBall,
+	eFire
 };
 
 class Price : public Ball
 
 {
 public:
-	float m_Vy;
 	ePriceType m_eType;
 
 	Price(void);

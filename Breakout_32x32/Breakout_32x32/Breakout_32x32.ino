@@ -66,8 +66,8 @@ void loop()
 		{
 			g_Bricks.m_Disply.m_Life--;
 			g_Bricks.AddBall(16,28, 3, -6.0);
-			g_Bricks.m_Stick.m_Loc_s.m_w = STICK_DEFAULT_WIDTH;
 
+			g_Bricks.m_Stick.ChangeStickType(eStickRegular);
 		}
  	}
 
@@ -88,9 +88,9 @@ void loop()
 	g_UI_In.GetKeyStatus(&P1_s, &P2_s);
 
 	if ( P1_s.m_R)
-		g_Bricks.m_Stick.m_Loc_s.m_X += 1;
+		g_Bricks.m_Stick.m_Loc_s.m_X += 0.9;
 	if (  P1_s.m_L)
-		g_Bricks.m_Stick.m_Loc_s.m_X -= 1;
+		g_Bricks.m_Stick.m_Loc_s.m_X -= 0.9;
 
 }
 #ifdef WIN32	

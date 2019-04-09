@@ -4,7 +4,7 @@
 #include "Display.h"
 #include <math.h>
 
-const   Line_Bit  Digit_arr[NUM_OF_DIG][DIG_HEIGHT]= 
+const   Line_Bit  Digit_arr[NUM_OF_DIG][DIG_HEIGHT] PROGMEM = 
 	{	
 		#include "Number_Bitmap.h"
 	};
@@ -75,7 +75,7 @@ void Display::MarkOnMatrix(int a_dT)
 		{
 			for(char x=0; x<DIG_WIDTH; x++)
 			{
-				char Line = *(char*)&Digit_arr[Di][y];
+				char Line = pgm_read_word_near((char*)&Digit_arr[Di][y]);
 				LM_SetPoint( x0 + x, y0 + y ,(Line>>x) & 1);
 			}
 		}
@@ -87,7 +87,7 @@ void Display::MarkOnMatrix(int a_dT)
 	{
 		for(char x=0; x<DIG_WIDTH; x++)
 		{
-				char Line =*(char*)&Digit_arr[Di][y];
+				char Line =pgm_read_word_near((char*)&Digit_arr[Di][y]);
 				LM_SetPoint( x0 + x, y0 + y ,(Line>>x) & 1);
 		}
 	}

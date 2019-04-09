@@ -22,7 +22,7 @@ void LM_Setup()
 {
 #ifdef WIN32
 #else
-	for(int M = 0; M < N_Y*N_X; M++)
+	for(int M = 0; M < N_Y/8*N_X/8; M++)
 	{
 		lc.shutdown(M,false);
 		lc.setIntensity(M,4);
@@ -40,13 +40,16 @@ void LM_SetPoint(char a_x, char a_y, char a_Val)
 	Xi = a_x/8;
 	Xb = a_x%8;
 
-	if (a_Val==0)
+	if ( a_y>=0 && a_y<N_Y && Xi>=0 && Xi<N_X/8)
 	{
-		Matrix[a_y][Xi] &= ((1<<Xb)^0xff);
-	}
-	else
-	{
-		Matrix[a_y][Xi] |= (1<<Xb);
+		if (a_Val==0)
+		{
+			Matrix[a_y][Xi] &= ((1<<Xb)^0xff);
+		}
+		else
+		{
+			Matrix[a_y][Xi] |= (1<<Xb);
+		}
 	}
 }
 
@@ -89,7 +92,7 @@ void LM_CopyImage2Matrix(unsigned char * a_pI)
 			if ( (Line & (1<<P))  > 0)   
 			{
 				LM_SetPoint(Mx*8 + P, My*8 + L, 1 );      
-				}
+			}
 			else
 			{
 				LM_SetPoint(Mx*8 + P, My*8 + L, 0 );     
