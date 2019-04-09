@@ -111,10 +111,12 @@ void gotoxy(int x, int y)
 
 
 
+#include <iostream>
+
 void LM_PC_DSP_Display_Matrix()
 {
 	char x,y;
-
+	HANDLE hSTD = GetStdHandle(STD_OUTPUT_HANDLE);
 	gotoxy(0,0);
 
 	for(y=0; y<N_Y; y++)
@@ -123,11 +125,15 @@ void LM_PC_DSP_Display_Matrix()
 		{
 			if (LM_GetPoint(x, y))
 			{
-				printf("@");
+				SetConsoleTextAttribute(hSTD,(8<<4)+4);
+				std::cout << "@";
+				//printf("@");
 			}
 			else
 			{
-				printf("-");
+				SetConsoleTextAttribute(hSTD,(8<<4)+7);
+				std::cout << "@"; 
+				// printf("@");
 			}
 		}
 		printf("\n");
