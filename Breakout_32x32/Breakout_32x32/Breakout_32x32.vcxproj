@@ -97,7 +97,9 @@
   <ItemGroup>
     <ClCompile Include="Ball.cpp" />
     <ClCompile Include="Brick.cpp" />
-    <ClCompile Include="Breakout_32x32.ino" />
+    <ClCompile Include="Breakout_32x32.ino">
+      <BrowseInformation Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</BrowseInformation>
+    </ClCompile>
     <ClCompile Include="Bricks.cpp" />
     <ClCompile Include="Fire.cpp" />
     <ClCompile Include="General.cpp" />

@@ -2,6 +2,8 @@
 #ifndef __GENERAL_H
 #define __GENERAL_H
 
+
+#define SPEED_FACTOR 1 // 1 - Realtime
 #define DO_DEBUG true
 
 #ifdef DO_DEBUG 
@@ -19,7 +21,7 @@ extern unsigned long g_Tic;
 	#define SERIAL_PRINT(F) 
 	#define SERIAL_PRINTLN(F) 
 	#define TIC_mS()   g_Tic = clock()
-	#define TOC_mS()   (clock()-g_Tic)
+	#define TOC_mS()   ((clock()-g_Tic)/SPEED_FACTOR)
 	#define DELAY(a) Sleep(a)
 	#define PROGMEM
 	#define pgm_read_word_near(A) (*A)

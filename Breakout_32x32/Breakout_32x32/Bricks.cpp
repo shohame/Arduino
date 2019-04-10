@@ -98,6 +98,9 @@ void Bricks::MoveAllFires(int a_dT_mSec)
 		pFire->MoveBall(a_dT_mSec);
 
 		BrickID = pFire->FindBallCollision(m_Wall_arr, m_WallCount);
+		if (BrickID>=0)
+			RemoveFire(i);
+
 		BrickID = pFire->FindBallCollision(m_Brick_arr, m_BrickCount);
 		if (BrickID>=0)
 		{
@@ -228,8 +231,21 @@ void Bricks::AddPrice(char a_x, char a_y)
 		pPrice->SetPos(a_x, a_y);
 		pPrice->m_V_s.m_X = 0;
 		pPrice->m_V_s.m_Y = PRICE_DEFAULT_SPEED;
-		pPrice->m_eType =(ePriceType) ( (int)eLarge + RAND_INT(0, PRICE_TYPE_COUNT));
+		pPrice->m_eType = (ePriceType) ( (int)eLarge + RAND_INT(0, PRICE_TYPE_COUNT));
 		m_PriceCount++;
+	}
+}
+
+void Bricks::AddFire(char a_x, char a_y)
+{
+	Fire* pFire;
+	if (m_FireCount < MAX_NUM_OF_FIRE)
+	{
+		pFire = &m_Fire_arr[m_FireCount];
+		pFire->SetPos(a_x, a_y);
+		pFire->m_V_s.m_X = 0;
+		pFire->m_V_s.m_Y = FIRE_DEFAULT_SPEED;
+		m_FireCount++;
 	}
 }
 

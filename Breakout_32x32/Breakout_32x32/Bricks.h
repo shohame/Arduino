@@ -39,6 +39,7 @@ public:
 	void AddBall(char a_x, char a_y, float a_Vx, float a_Vy );
 	void AddWall(char a_x, char a_y, char a_w, char a_h);
 	void AddPrice(char a_x, char a_y);
+	void AddFire(char a_x, char a_y);
 
 	void RemoveBrick(char a_BrickIdx);
 	void RemoveBall (char a_BallIndex);

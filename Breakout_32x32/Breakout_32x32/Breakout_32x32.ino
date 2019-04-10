@@ -7,6 +7,7 @@
 #include "Ball.h"
 #include "Stick.h"
 #include "Ball.h"
+#include "Fire.h"
 #include "Price.h"
 #include "Display.h"
 #include "Bricks.h"
@@ -75,6 +76,7 @@ void loop()
   
 	g_Bricks.MoveAllBalls(Toc);
 	g_Bricks.MoveAllPrices(Toc);
+	g_Bricks.MoveAllFires(Toc);
 
 	LM_Clear();
 	g_Bricks.MarkBricksOnMatrix();
@@ -91,6 +93,13 @@ void loop()
 		g_Bricks.m_Stick.m_Loc_s.m_X += 0.9;
 	if (  P1_s.m_L)
 		g_Bricks.m_Stick.m_Loc_s.m_X -= 0.9;
+	if (P1_s.m_U && g_Bricks.m_Stick.m_Type == eStickFire)
+	{
+		char x = (char)floor(0.5 + g_Bricks.m_Stick.m_Loc_s.m_X + (g_Bricks.m_Stick.m_Loc_s.m_w - 1)/2);
+		char y = g_Bricks.m_Stick.m_Loc_s.m_Y - 1;
+		g_Bricks.AddFire(x, y);
+	}
+
 
 }
 #ifdef WIN32	
