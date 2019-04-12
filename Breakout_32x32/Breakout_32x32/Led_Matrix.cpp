@@ -6,8 +6,6 @@
 
 #ifdef WIN32
 	typedef unsigned  char    byte;
-  #define pgm_read_word_near(A) *A
-
 #else
 	#include "LedControl_HW.h"
 	#include "SPI.h"
