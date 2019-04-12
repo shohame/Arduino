@@ -17,18 +17,18 @@ public:
 	Ball(void);
 	~Ball(void);
 	stVector   m_V_s;		// velocity
-	char m_Acceleration;	// +10 percent for each 100 sec 
+	int8 m_Acceleration;	// +10 percent for each 100 sec 
 
 
 
-	void Bounce(char a_Direction, float a_Depth );
-	void MoveBall(int a_dT_mSec);
+	void Bounce(int8 a_Direction, float32 a_Depth );
+	void MoveBall(int16 a_dT_mSec);
 	void SetSpeed(stVector* a_pV);
-	void SetSpeed(float a_Vx, float a_Vy);
+	void SetSpeed(float32 a_Vx, float32 a_Vy);
 
-	char FindBallCollision(Brick a_Brick_arr[], char a_BrickCount);
-	char Where_I_TouchStick (Brick * a_pBrick);
-	void ChangeAngleBy(float a_dAngle);
+	int8 FindBallCollision(Brick a_Brick_arr[], int8 a_BrickCount);
+	int8 Where_I_TouchStick (Brick * a_pBrick);
+	void ChangeAngleBy(float32 a_dAngle);
 
 
 

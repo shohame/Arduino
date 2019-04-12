@@ -1,5 +1,5 @@
 #include "stdafx.h"
-
+#include "General.h"
 #include "Display.h"
 #include "Led_Matrix.h"
 #include "Price.h"
@@ -24,12 +24,15 @@ Price::~Price(void)
 
 void Price::MarkBrickOnMatrix()
 {
-	for(char y=0; y<DIG_HEIGHT; y++)
+	for(int8 y=0; y<DIG_HEIGHT; y++)
 	{
-		for(char x=0; x<DIG_WIDTH; x++)
+		for(int8 x=0; x<DIG_WIDTH; x++)
 		{
-				char Line =*(char*)&Digit_arr[m_eType][y];
-				LM_SetPoint( m_Loc_s.m_X + x,  m_Loc_s.m_Y + y ,(Line>>x) & 1);
+				int8 Line =*(int8*)&Digit_arr[m_eType][y];
+				if((Line>>x) & 1)
+				{
+					LM_SetPoint( (int8)m_Loc_s.m_X + x, (int8)m_Loc_s.m_Y + y, 1);
+				}
 		}
 	}
 

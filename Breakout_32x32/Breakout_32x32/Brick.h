@@ -7,10 +7,10 @@
 
 typedef struct stLoc_name
 {
-	float	m_X;
-	float	m_Y;
-	char	m_w;
-	char	m_h;
+	float32	m_X;
+	float32	m_Y;
+	int8	m_w;
+	int8	m_h;
 }stLoc;
 
 
@@ -26,12 +26,12 @@ public:
 	stLoc m_Loc_s;	
 
 	Brick(void);
-	Brick(char a_x, char a_y, char a_w, char a_h);
+	Brick(int8 a_x, int8 a_y, int8 a_w, int8 a_h);
 	~Brick(void);
 
-	void SetPos(char a_x, char a_y);
-	char WhereBrickTouchMe (Brick * a_pBrick, float* a_pD);
-	void SetLoc(char a_x, char a_y, char a_w, char a_h);
+	void SetPos(int8 a_x, int8 a_y);
+	int8 WhereBrickTouchMe (Brick * a_pBrick, float32* a_pD);
+	void SetLoc(int8 a_x, int8 a_y, int8 a_w, int8 a_h);
 
 	void MarkBrickOnMatrix();
 

@@ -3,7 +3,7 @@
 #define __GENERAL_H
 
 
-#define SPEED_FACTOR 1 // 1 - Realtime
+#define MAX_FRAME_TIME 150 // above MAX_FRAME_TIME it will slow the game (just for slow computers not Arduino)
 #define DO_DEBUG true
 
 #ifdef DO_DEBUG 
@@ -12,7 +12,7 @@
 
 #include <math.h>
 #include <time.h>
-extern unsigned long g_Tic;
+
 
 // Data types:
 #ifdef WIN32
@@ -33,6 +33,8 @@ extern unsigned long g_Tic;
 	typedef float					float32;
 #endif
 
+extern uint32 g_Tic;
+
 // Includs:
 #ifdef WIN32
 	#include <Windows.h>
@@ -48,13 +50,13 @@ extern unsigned long g_Tic;
 	#define SERIAL_BEGIN(F)
 	#define SERIAL_PRINT(F) 
 	#define SERIAL_PRINTLN(F) 
-	#define TIC_mS()   g_Tic = clock()
-	#define TOC_mS()   ((clock()-g_Tic)/SPEED_FACTOR)
+	#define TIC_mS()   g_Tic = ((uint32)clock())
+	#define TOC_mS()   ((uint32)((clock()-g_Tic)))
 	#define DELAY(a) Sleep(a)
 	#define PROGMEM
 	#define pgm_read_word_near(A) (*A)
 	#define RAND_INT(F,T) (( rand() % (T-F) ) + F)
-	#define GET_RAMDOM_SEED()	srand(time(NULL))
+	#define GET_RAMDOM_SEED()	srand((uint32)time(NULL))
 #else
 	#define SERIAL_BEGIN(F) Serial.begin(F)
 	#define SERIAL_PRINT(F) Serial.print(F)
@@ -67,23 +69,23 @@ extern unsigned long g_Tic;
 #endif
 
 // Comon macros:
-#define PI (3.14159265358979)
-
-#define fSIGN(a) ( (a>=0.0) ? 1.0 : -1.0 ) 
+#define PI (3.14159265358979f)
+#define ROUND_CORD_TO_U8(C) ((int8)floor(0.5f+C))
+#define fSIGN(a) ( (a>=0.0f) ? 1.0f : -1.0f ) 
 #define ABS(a) ( (a>0) ? (a) : (-a) ) 
 #define POW2(a) (a*a)
 
 #define MAX(a,b) (((a)>(b))?(a):(b))
 #define MIN(a,b) (((a)<(b))?(a):(b))
 
-#define RAD2DEG(a) (((float)(a))*180.0/PI)
-#define DEG2RAD(a) (((float)(a))*PI/180.0)
+#define RAD2DEG(a) (((float32)(a))*180.0f/PI)
+#define DEG2RAD(a) (((float32)(a))*PI/180.0f)
 
 // Comon structures:
 typedef struct stVector_name
 {
-	float m_X;
-	float m_Y;
+	float32 m_X;
+	float32 m_Y;
 }stVector;
 
 

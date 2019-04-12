@@ -9,14 +9,14 @@
 
 typedef struct Line_Bit
 {
-	char b0:1;
-	char b1:1;
-	char b2:1;
-	char b3:1;
-	char b4:1;
-	char b5:1;
-	char b6:1;
-	char b7:1;
+	int8 b0:1;
+	int8 b1:1;
+	int8 b2:1;
+	int8 b3:1;
+	int8 b4:1;
+	int8 b5:1;
+	int8 b6:1;
+	int8 b7:1;
 
 }Line_Bit;
 
@@ -28,15 +28,15 @@ public:
 	Display(void);
 	~Display(void);
 
-	long m_Score;
-	long m_LastDispScore;
-	int  m_Sum_dT;
+	uint32 m_Score;
+	uint32 m_LastDispScore;
+	int16  m_Sum_dT;
 
-	int m_Life;
+	int8 m_Life;
 
-	void AddScore(int a_Value);
+	void AddScore(int32 a_Value);
 	void ResetGame(void);
-	void MarkOnMatrix(int a_dT);
+	void MarkOnMatrix(int16 a_dT);
 
 };
 

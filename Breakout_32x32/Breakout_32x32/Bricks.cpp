@@ -1,4 +1,5 @@
 #include "StdAfx.h"
+#include "General.h"
 #include "Brick.h"
 #include "Ball.h"
 #include "Price.h"
@@ -18,7 +19,7 @@ Bricks::~Bricks(void)
 
 void Bricks::MarkBricksOnMatrix()
 {
-	char i;
+	int8 i;
 
 	for (i=0; i<m_BrickCount; i++)
 	{
@@ -49,9 +50,9 @@ void Bricks::MarkBricksOnMatrix()
 }
 
 
-void Bricks::MoveAllBalls(int a_dT_mSec)
+void Bricks::MoveAllBalls(int16 a_dT_mSec)
 {
-	char i, BrickID;
+	int8 i, BrickID;
 	Ball *pBall;
 
 	for (i=0; i<m_BallCount; i++)
@@ -77,7 +78,7 @@ void Bricks::MoveAllBalls(int a_dT_mSec)
 		{
 			if (RAND_INT(0, GIVE_PRICE_RATE) == 0)
 			{
-				AddPrice(m_Brick_arr[BrickID].m_Loc_s.m_X, (m_Brick_arr[BrickID].m_Loc_s.m_Y));
+				AddPrice(ROUND_CORD_TO_U8(m_Brick_arr[BrickID].m_Loc_s.m_X), ROUND_CORD_TO_U8(m_Brick_arr[BrickID].m_Loc_s.m_Y));
 			}
 			RemoveBrick(BrickID);	// Remove just if BrickID>=0 !
 			m_Disply.AddScore(125);
@@ -86,9 +87,9 @@ void Bricks::MoveAllBalls(int a_dT_mSec)
 	}
 }
 
-void Bricks::MoveAllFires(int a_dT_mSec)
+void Bricks::MoveAllFires(int16 a_dT_mSec)
 {
-	char i, BrickID;
+	int8 i, BrickID;
 	Fire *pFire;
 
 	for (i=0; i<m_FireCount; i++)
@@ -106,7 +107,7 @@ void Bricks::MoveAllFires(int a_dT_mSec)
 		{
 			if (RAND_INT(0, GIVE_PRICE_RATE) == 0)
 			{
-				AddPrice(m_Brick_arr[BrickID].m_Loc_s.m_X, (m_Brick_arr[BrickID].m_Loc_s.m_Y));
+				AddPrice(ROUND_CORD_TO_U8(m_Brick_arr[BrickID].m_Loc_s.m_X), ROUND_CORD_TO_U8(m_Brick_arr[BrickID].m_Loc_s.m_Y));
 			}
 			RemoveBrick(BrickID);	// Remove just if BrickID>=0 !
 			RemoveFire(i);
@@ -119,7 +120,7 @@ void Bricks::MoveAllFires(int a_dT_mSec)
 
 
 
-void Bricks::GetThePrice(ePriceType a_eType, char a_x, char a_y)
+void Bricks::GetThePrice(ePriceType a_eType, int8 a_x, int8 a_y)
 {
 	switch(a_eType)
 	{
@@ -154,9 +155,9 @@ void Bricks::GetThePrice(ePriceType a_eType, char a_x, char a_y)
 	}
 }
 
-void Bricks::MoveAllPrices(int a_dT_mSec)
+void Bricks::MoveAllPrices(int16 a_dT_mSec)
 {
-	char i, Remove;
+	int8 i, Remove;
 	Price *pPrice;
 
 	for (i=0; i<m_PriceCount; i++)
@@ -167,7 +168,7 @@ void Bricks::MoveAllPrices(int a_dT_mSec)
 
 		if (pPrice->Where_I_TouchStick(&m_Stick))
 		{	
-			GetThePrice(pPrice->m_eType, pPrice->m_Loc_s.m_X, pPrice->m_Loc_s.m_Y);
+			GetThePrice(pPrice->m_eType, ROUND_CORD_TO_U8(pPrice->m_Loc_s.m_X), ROUND_CORD_TO_U8(pPrice->m_Loc_s.m_Y));
 			Remove = true;
 		}
 
@@ -187,7 +188,7 @@ void Bricks::ClearAllBricksBallsWalls()
 	m_PriceCount = 0;
 }
 
-void Bricks::AddBrick(char a_x, char a_y)
+void Bricks::AddBrick(int8 a_x, int8 a_y)
 {
 	assert(m_BrickCount < MAX_NUM_OF_BREAKS);
 	if ( m_BrickCount < MAX_NUM_OF_BREAKS)
@@ -198,7 +199,7 @@ void Bricks::AddBrick(char a_x, char a_y)
 }
 
 
-void Bricks::AddBall(char a_x, char a_y, float a_Vx, float a_Vy )
+void Bricks::AddBall(int8 a_x, int8 a_y, float32 a_Vx, float32 a_Vy )
 {
 	assert(m_BallCount < MAX_NUM_OF_BALLS);
 	if (m_BallCount < MAX_NUM_OF_BALLS)
@@ -211,7 +212,7 @@ void Bricks::AddBall(char a_x, char a_y, float a_Vx, float a_Vy )
 
 
 
-void Bricks::AddWall(char a_x, char a_y, char a_w, char a_h)
+void Bricks::AddWall(int8 a_x, int8 a_y, int8 a_w, int8 a_h)
 {
 	assert(m_WallCount < MAX_NUM_OF_WALLS);
 	if (m_WallCount < MAX_NUM_OF_WALLS)
@@ -221,7 +222,7 @@ void Bricks::AddWall(char a_x, char a_y, char a_w, char a_h)
 	}
 }
 
-void Bricks::AddPrice(char a_x, char a_y)
+void Bricks::AddPrice(int8 a_x, int8 a_y)
 {
 	Price* pPrice;
 //	assert(m_PriceCount < MAX_NUM_OF_PRICE);
@@ -231,12 +232,12 @@ void Bricks::AddPrice(char a_x, char a_y)
 		pPrice->SetPos(a_x, a_y);
 		pPrice->m_V_s.m_X = 0;
 		pPrice->m_V_s.m_Y = PRICE_DEFAULT_SPEED;
-		pPrice->m_eType = (ePriceType) ( (int)eLarge + RAND_INT(0, PRICE_TYPE_COUNT));
+		pPrice->m_eType = (ePriceType) ((int8)eLarge +(int8)RAND_INT(0, PRICE_TYPE_COUNT));
 		m_PriceCount++;
 	}
 }
 
-void Bricks::AddFire(char a_x, char a_y)
+void Bricks::AddFire(int8 a_x, int8 a_y)
 {
 	Fire* pFire;
 	if (m_FireCount < MAX_NUM_OF_FIRE)
@@ -250,7 +251,7 @@ void Bricks::AddFire(char a_x, char a_y)
 }
 
 
-void Bricks::RemoveBrick(char a_BrickIdx)
+void Bricks::RemoveBrick(int8 a_BrickIdx)
 {
 	assert((a_BrickIdx >= 0) && (a_BrickIdx < m_BrickCount));
 
@@ -261,7 +262,7 @@ void Bricks::RemoveBrick(char a_BrickIdx)
 	}
 }
 
-void Bricks::RemoveBall(char a_BallIndex)
+void Bricks::RemoveBall(int8 a_BallIndex)
 {
 	assert((a_BallIndex >= 0) && (a_BallIndex < m_BallCount));
 	if (a_BallIndex<m_BallCount)
@@ -271,7 +272,7 @@ void Bricks::RemoveBall(char a_BallIndex)
 	}
 }
 
-void Bricks::RemoveWall(char a_WallIndex)
+void Bricks::RemoveWall(int8 a_WallIndex)
 {
 	assert((a_WallIndex >= 0) && (a_WallIndex < m_WallCount));
 	if (a_WallIndex<m_WallCount)
@@ -281,7 +282,7 @@ void Bricks::RemoveWall(char a_WallIndex)
 	}
 }
 
-void Bricks::RemovePrice(char a_PriceIndex)
+void Bricks::RemovePrice(int8 a_PriceIndex)
 {
 	assert((a_PriceIndex >= 0) && (a_PriceIndex < m_PriceCount));
 	if (a_PriceIndex<m_PriceCount)
@@ -291,7 +292,7 @@ void Bricks::RemovePrice(char a_PriceIndex)
 	}
 }
 
-void Bricks::RemoveFire(char a_FireIndex)
+void Bricks::RemoveFire(int8 a_FireIndex)
 {
 	assert((a_FireIndex >= 0) && (a_FireIndex < m_FireCount));
 	if (a_FireIndex<m_FireCount)
@@ -313,20 +314,17 @@ void Bricks::InitLeve_Clear()
 	AddWall(24,0,1, 6);		// Score / Life divader 
 }
 
-void Bricks::AddLineOfBricks(char a_x0, char a_y0, char a_Count)
+void Bricks::AddLineOfBricks(int8 a_x0, int8 a_y0, int8 a_Count)
 {
-	for(char x=0; x<a_Count; x++)
+	for(int8 x=0; x<a_Count; x++)
 	{
 		AddBrick(a_x0 + x*(BREAK_DEFAULT_WIDTH+1), a_y0);
 	}
 }
 
 
-void Bricks::InitLevel(char a_Level)
+void Bricks::InitLevel(int8 a_Level)
 {
-	char line, x;
-	char Nx, X0;
-
 	InitLeve_Clear();
 
 	switch(a_Level)
