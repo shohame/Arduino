@@ -1,12 +1,10 @@
-// Breakout_32x32.cpp : Defines the entry point for the console application.
-//
-
 #include "stdafx.h"
 #include "General.h"
 #include "Led_Matrix.h"
 #include "Ball.h"
 #include "Stick.h"
 #include "Ball.h"
+#include "Fire.h"
 #include "Price.h"
 #include "Display.h"
 #include "Bricks.h"
@@ -16,7 +14,7 @@
 
 Bricks g_Bricks;
 UI_Input g_UI_In;
-int Level = 1;
+int8 Level = 1;
 
 void RestartGame()
 {
@@ -39,15 +37,12 @@ void setup()
 //	Draw_Globe();
 	LM_Setup();
 	RestartGame();
-
 }
-int DDD=0;
-
 
 void loop()
 {
-	unsigned long Toc = TOC_mS();
-
+	int16 Toc = (int16)TOC_mS();
+	Toc = MIN(Toc, MAX_FRAME_TIME);
   	if (g_Bricks.m_BrickCount == 0)
 	{
 		DELAY(500);
@@ -75,6 +70,7 @@ void loop()
   
 	g_Bricks.MoveAllBalls(Toc);
 	g_Bricks.MoveAllPrices(Toc);
+	g_Bricks.MoveAllFires(Toc);
 
 	LM_Clear();
 	g_Bricks.MarkBricksOnMatrix();
@@ -88,13 +84,20 @@ void loop()
 	g_UI_In.GetKeyStatus(&P1_s, &P2_s);
 
 	if ( P1_s.m_R)
-		g_Bricks.m_Stick.m_Loc_s.m_X += 0.9;
+		g_Bricks.m_Stick.m_Loc_s.m_X += 0.9f;
 	if (  P1_s.m_L)
-		g_Bricks.m_Stick.m_Loc_s.m_X -= 0.9;
+		g_Bricks.m_Stick.m_Loc_s.m_X -= 0.9f;
+	if (P1_s.m_U && g_Bricks.m_Stick.m_Type == eStickFire)
+	{
+		int8 x = ROUND_CORD_TO_U8(g_Bricks.m_Stick.m_Loc_s.m_X + ((g_Bricks.m_Stick.m_Loc_s.m_w - 1)/2));
+		int8 y = ROUND_CORD_TO_U8(g_Bricks.m_Stick.m_Loc_s.m_Y - 1);
+		g_Bricks.AddFire(x, y);
+	}
+
 
 }
 #ifdef WIN32	
-int _tmain(int argc, _TCHAR* argv[])
+int32 _tmain(int32 argc, _TCHAR* argv[])
 {
    HANDLE out = GetStdHandle(STD_OUTPUT_HANDLE);
 

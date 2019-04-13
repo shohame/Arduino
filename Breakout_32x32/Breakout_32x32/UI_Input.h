@@ -14,10 +14,10 @@
 
 typedef struct stKeyStatus_name
 {
-	char m_L;	
-	char m_R;
-	char m_U;
-	char m_D;
+	int8 m_L;	
+	int8 m_R;
+	int8 m_U;
+	int8 m_D;
 }stKeyStatus;
 
 class UI_Input

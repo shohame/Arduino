@@ -4,22 +4,21 @@
 #include "Led_Matrix.h"
 #include "Globe.h"
 
-const unsigned char g_LedStatus[50][16 * 8] PROGMEM = 
-		#include "Globe_Data.h"
-
-	int g_test = 1;
+const uint8 g_LedStatus[50][16 * 8] PROGMEM = 
+		#include "Globe_Data.h" 
 
 
-void CopyImage2LedStatus(unsigned char * a_pI)
+
+void CopyImage2LedStatus(uint8 * a_pI)
 {
-	for(byte My = 0; My<4; My++)
+	for(uint8 My = 0; My<4; My++)
 	{
-		for(byte L=0; L<8; L++)
+		for(uint8 L=0; L<8; L++)
 		{
-			for(byte Mx = 0; Mx<4; Mx++)
+			for(uint8 Mx = 0; Mx<4; Mx++)
 			{
-				unsigned char Line = pgm_read_word_near(&a_pI[Mx+L*4+My*4*8]);
-				for(byte P=0; P<8; P++)
+				uint8 Line = pgm_read_word_near(&a_pI[Mx+L*4+My*4*8]);
+				for(uint8 P=0; P<8; P++)
 				{  
 					if ( (Line & (1<<P))  > 0)   
 					{
@@ -39,7 +38,7 @@ void CopyImage2LedStatus(unsigned char * a_pI)
 
 void Draw_Globe()
 {
-	int i,j;
+	int16 i,j;
 	LM_PC_DSP_Display_Matrix();
 
 
@@ -48,7 +47,7 @@ void Draw_Globe()
 	{
 		for (i=0; i<50; i++)
 		{
-			CopyImage2LedStatus((unsigned char*)g_LedStatus[i]);
+			CopyImage2LedStatus((uint8*)g_LedStatus[i]);
 			LM_PC_DSP_Display_Matrix();
 			DELAY(50);
 		}

@@ -5,9 +5,6 @@
 
 
 #ifdef WIN32
-	typedef unsigned  char    byte;
-  #define pgm_read_word_near(A) *A
-
 #else
 	#include "LedControl_HW.h"
 	#include "SPI.h"
@@ -15,14 +12,14 @@
 #endif
 
 
-char Matrix[N_Y][N_X/8];
+int8 Matrix[N_Y][N_X/8];
 
 
 void LM_Setup()
 {
 #ifdef WIN32
 #else
-	for(int M = 0; M < N_Y/8*N_X/8; M++)
+	for(int8 M = 0; M < (N_Y/8)*(N_X/8); M++)
 	{
 		lc.shutdown(M,false);
 		lc.setIntensity(M,4);
@@ -33,9 +30,9 @@ void LM_Setup()
 }
 
 
-void LM_SetPoint(char a_x, char a_y, char a_Val)
+void LM_SetPoint(int8 a_x, int8 a_y, int8 a_Val)
 {
-	char Xi, Xb;
+	int8 Xi, Xb;
 
 	Xi = a_x/8;
 	Xb = a_x%8;
@@ -53,9 +50,9 @@ void LM_SetPoint(char a_x, char a_y, char a_Val)
 	}
 }
 
-char LM_GetPoint(char a_x, char a_y)
+int8 LM_GetPoint(int8 a_x, int8 a_y)
 {
-	char Xi, Xb;
+	int8 Xi, Xb;
 	Xi = a_x/8;
 	Xb = a_x%8;
 
@@ -66,7 +63,7 @@ char LM_GetPoint(char a_x, char a_y)
 
 void LM_Clear()
 {
-	char x,y;
+	int8 x,y;
 
 	for(y=0; y<N_Y; y++)
 	{
@@ -78,16 +75,16 @@ void LM_Clear()
 }
 
 
-void LM_CopyImage2Matrix(unsigned char * a_pI)
+void LM_CopyImage2Matrix(uint8 * a_pI)
 {
-  for(byte My = 0; My<4; My++)
+  for(uint8 My = 0; My<4; My++)
   {
-    for(byte L=0; L<8; L++)
+    for(uint8 L=0; L<8; L++)
     {
-      for(byte Mx = 0; Mx<4; Mx++)
+      for(uint8 Mx = 0; Mx<4; Mx++)
       {
-        int Line = pgm_read_word_near(&a_pI[Mx+L*4+My*4*8]);
-        for(byte P=0; P<8; P++)
+        int16 Line = pgm_read_word_near(&a_pI[Mx+L*4+My*4*8]);
+        for(uint8 P=0; P<8; P++)
         {  
 			if ( (Line & (1<<P))  > 0)   
 			{
@@ -105,7 +102,7 @@ void LM_CopyImage2Matrix(unsigned char * a_pI)
 
 #ifdef WIN32
 
-void gotoxy(int x, int y)
+void gotoxy(int16 x, int16 y)
 {
 	COORD pos = {x, y};
 	HANDLE hC = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -118,7 +115,7 @@ void gotoxy(int x, int y)
 
 void LM_PC_DSP_Display_Matrix()
 {
-	char x,y;
+	int8 x,y;
 	HANDLE hSTD = GetStdHandle(STD_OUTPUT_HANDLE);
 	gotoxy(0,0);
 
@@ -145,7 +142,7 @@ void LM_PC_DSP_Display_Matrix()
 #else
 void LM_PC_DSP_Display_Matrix()
 {
-	char x,y;
+	int8 x,y;
 
 	
 	for(y=0; y<N_Y; y++)
