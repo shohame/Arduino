@@ -53,9 +53,9 @@ void Display::MarkOnMatrix(int16 a_dT)
 
 	m_LastDispScore = tScore;
 
-	int8 W = 4; // Width
+	int8 Width = DIG_WIDTH + 1; 
 	int8 i, N_Digit = 1;
-	if (tScore > 9)		N_Digit = 2;
+	if (tScore > 9)			N_Digit = 2;
 	if (tScore > 99)		N_Digit = 3;
 	if (tScore > 999)		N_Digit = 4;
 	if (tScore > 9999)		N_Digit = 5;
@@ -64,18 +64,18 @@ void Display::MarkOnMatrix(int16 a_dT)
 		
 	y0 = 0;
 
-	for (i =0; i<N_Digit; i++)
+	for (i=0; i<N_Digit; i++)
 	{
 		Di = tScore%10;
 		tScore = tScore / 10;
 
-		x0 = (6 - N_Digit) * W/2 + (N_Digit-1-i)*W;
+		x0 = (6 - N_Digit) * Width/2 + (N_Digit-1-i)*Width;
 
 		for(int8 y=0; y<DIG_HEIGHT; y++)
 		{
+			int8 Line = pgm_read_word_near((int8*)&Digit_arr[Di][y]);
 			for(int8 x=0; x<DIG_WIDTH; x++)
 			{
-				int8 Line = pgm_read_word_near((int8*)&Digit_arr[Di][y]);
 				LM_SetPoint( x0 + x, y0 + y ,(Line>>x) & 1);
 			}
 		}
@@ -85,9 +85,9 @@ void Display::MarkOnMatrix(int16 a_dT)
 	Di = m_Life;
 	for(int8 y=0; y<DIG_HEIGHT; y++)
 	{
+		int8 Line =pgm_read_word_near((int8*)&Digit_arr[Di][y]);
 		for(int8 x=0; x<DIG_WIDTH; x++)
 		{
-				int8 Line =pgm_read_word_near((int8*)&Digit_arr[Di][y]);
 				LM_SetPoint( x0 + x, y0 + y ,(Line>>x) & 1);
 		}
 	}
