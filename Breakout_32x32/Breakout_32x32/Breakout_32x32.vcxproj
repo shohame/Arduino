@@ -82,7 +82,7 @@
     <ClInclude Include="Ball.h" />
     <ClInclude Include="Brick.h" />
     <ClInclude Include="Bricks.h" />
-    <ClInclude Include="Char_Bitmap.h" />
+    <ClInclude Include="Char_BM.h" />
     <ClInclude Include="Fire.h" />
     <ClInclude Include="General.h" />
     <ClInclude Include="Globe.h" />
@@ -103,6 +103,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Bricks.cpp" />
+    <ClCompile Include="Char_BM.cpp" />
     <ClCompile Include="Fire.cpp" />
     <ClCompile Include="General.cpp" />
     <ClCompile Include="Globe.cpp" />

@@ -38,6 +38,9 @@ public:
 	void ResetGame(void);
 	void MarkOnMatrix(int16 a_dT);
 
+
+	int8 MarkCharOnMatrix(int8 a_CharIdx, int8 a_X0, int8 a_Y0); // return X1 for the next letter (include space)
+
 };
 
 
