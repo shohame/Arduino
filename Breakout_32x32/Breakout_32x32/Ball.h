@@ -16,6 +16,8 @@ class Ball : public Brick
 public:
 	Ball(void);
 	~Ball(void);
+	virtual void Init();
+
 	stVector   m_V_s;		// velocity
 	int8 m_Acceleration;	// +10 percent for each 100 sec 
 

@@ -15,7 +15,7 @@ public:
 
 	Fire(void);
 	~Fire(void);
-
+	virtual void Init();
 	
 
 };

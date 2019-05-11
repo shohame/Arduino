@@ -24,13 +24,16 @@
 	typedef unsigned	long		uint32;
 	typedef float					float32;
 #else // Arduino
-	typedef				char		int8;
-	typedef unsigned	char		uint8;
-	typedef				int			int16;
-	typedef unsigned	int			uint16;
-	typedef				long		int32;
-	typedef unsigned	long		uint32;
-	typedef float					float32;
+	typedef char				int8;
+	typedef unsigned	char	uint8;
+	typedef				    int		int16;
+	typedef unsigned	int		uint16;
+	typedef				    long	int32;
+	typedef unsigned	long    uint32;
+	typedef				    float	float32;
+
+  extern void(* resetFunc) (void);
+
 #endif
 
 extern uint32 g_Tic;
@@ -47,6 +50,7 @@ extern uint32 g_Tic;
 
 // Macros:
 #ifdef WIN32
+	#define resetFunc() RestartGame()
 	#define SERIAL_BEGIN(F)
 	#define SERIAL_PRINT(F) 
 	#define SERIAL_PRINTLN(F) 
@@ -58,6 +62,7 @@ extern uint32 g_Tic;
 	#define RAND_INT(F,T) (( rand() % (T-F) ) + F)
 	#define GET_RAMDOM_SEED()	srand((uint32)time(NULL))
 #else
+	//void resetFunc(void);
 	#define SERIAL_BEGIN(F) Serial.begin(F)
 	#define SERIAL_PRINT(F) Serial.print(F)
 	#define SERIAL_PRINTLN(F) Serial.println(F)

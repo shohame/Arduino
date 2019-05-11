@@ -2,8 +2,12 @@
 #include <math.h>
 #include "Ball.h"
 
-
 Ball::Ball(void)
+{
+	Init();
+}
+
+void Ball::Init(void)
 {
 	m_Acceleration = BALL_DEFAULT_ACCSELERATION;
 	m_Loc_s.m_w = BALL_DEFAULT_WIDTH;
@@ -98,6 +102,11 @@ void Ball::SetSpeed(float32 a_Vx, float32 a_Vy)
 
 void Ball::MoveBall(int16 a_dT_mSec)
 {
+	if (ABS(m_V_s.m_Y) < 1.5)
+	{
+		m_V_s.m_Y = 1.5;
+	}
+
 	m_Loc_s.m_X +=  m_V_s.m_X * (float32)a_dT_mSec / 1000.0f;
 	m_Loc_s.m_Y +=  m_V_s.m_Y * (float32)a_dT_mSec / 1000.0f;
 

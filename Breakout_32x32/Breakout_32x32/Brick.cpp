@@ -7,19 +7,16 @@
 
 Brick::Brick()
 {
+	Init();
+}
+
+void Brick::Init(void)
+{
 	m_Loc_s.m_X = -1;
 	m_Loc_s.m_Y = -1;
 	m_Loc_s.m_w = BREAK_DEFAULT_WIDTH;
 	m_Loc_s.m_h = BREAK_DEFAULT_HEIGHT;
 }
-Brick::Brick(int8 a_x, int8 a_y, int8 a_w, int8 a_h)
-{
-	m_Loc_s.m_X = a_x;
-	m_Loc_s.m_Y = a_y;
-	m_Loc_s.m_w = a_w;
-	m_Loc_s.m_h = a_h;	
-}
-
 
 Brick::~Brick(void)
 {

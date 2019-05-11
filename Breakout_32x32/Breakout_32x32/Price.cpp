@@ -4,8 +4,12 @@
 #include "Led_Matrix.h"
 #include "Price.h"
 
-
 Price::Price(void)
+{
+	Init();
+}
+
+void Price::Init(void)
 {
 	m_Loc_s.m_w = PRICE_DEFAULT_WIDTH;
 	m_Loc_s.m_h = PRICE_DEFAULT_HEIGHT;
@@ -28,7 +32,8 @@ void Price::MarkBrickOnMatrix()
 	{
 		for(int8 x=0; x<DIG_WIDTH; x++)
 		{
-				int8 Line =*(int8*)&Digit_arr[m_eType][y];
+				int8 Line = pgm_read_word_near((int8*)&Digit_arr[m_eType][y]);
+
 				if((Line>>x) & 1)
 				{
 					LM_SetPoint( (int8)m_Loc_s.m_X + x, (int8)m_Loc_s.m_Y + y, 1);
