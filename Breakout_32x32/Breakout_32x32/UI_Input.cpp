@@ -45,8 +45,34 @@ void GetKeyStatus_sub(stKeyStatus* a_pKS_Player)
 	a_pKS_Player->m_R = !digitalRead(PIN_KEY_R);
 	a_pKS_Player->m_U = !digitalRead(PIN_KEY_U);
 	a_pKS_Player->m_D = !digitalRead(PIN_KEY_D);
-
 }
+
+
+void GetKeyStatus_Debug(stKeyStatus* a_pKS_Player1, stKeyStatus* a_pKS_Player2)
+{
+#if DO_DEBUG
+
+	SERIAL_PRINT("Player 1: ");
+	
+	if (a_pKS_Player1->m_L) SERIAL_PRINT("L");
+	if (a_pKS_Player1->m_R) SERIAL_PRINT("R");
+	if (a_pKS_Player1->m_U) SERIAL_PRINT("U");
+	if (a_pKS_Player1->m_D) SERIAL_PRINT("D");
+	SERIAL_PRINTLN();
+
+	SERIAL_PRINT("Player 2: ");
+
+	if (a_pKS_Player2->m_L) SERIAL_PRINT("L");
+	if (a_pKS_Player2->m_R) SERIAL_PRINT("R");
+	if (a_pKS_Player2->m_U) SERIAL_PRINT("U");
+	if (a_pKS_Player2->m_D) SERIAL_PRINT("D");
+
+	SERIAL_PRINTLN();
+#endif
+}
+
+
+
 
 void UI_Input::GetKeyStatus(stKeyStatus* a_pKS_Player1, stKeyStatus* a_pKS_Player2)
 {
@@ -62,6 +88,8 @@ void UI_Input::GetKeyStatus(stKeyStatus* a_pKS_Player1, stKeyStatus* a_pKS_Playe
 
 	digitalWrite(PIN_PLAYER_1, 1);
 	digitalWrite(PIN_PLAYER_2, 1);
+
+	GetKeyStatus_Debug(a_pKS_Player1, a_pKS_Player2);
 
 }
 #endif

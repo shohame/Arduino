@@ -26,8 +26,9 @@ public:
 	stLoc m_Loc_s;	
 
 	Brick(void);
-	Brick(int8 a_x, int8 a_y, int8 a_w, int8 a_h);
 	~Brick(void);
+
+	virtual void Init();
 
 	void SetPos(int8 a_x, int8 a_y);
 	int8 WhereBrickTouchMe (Brick * a_pBrick, float32* a_pD);
@@ -36,8 +37,6 @@ public:
 	void MarkBrickOnMatrix();
 
 };
-
-
 
 #endif	//	#ifndef __BREAK_H
 

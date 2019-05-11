@@ -19,26 +19,36 @@ void LM_Setup()
 {
 #ifdef WIN32
 #else
+/*	for(int8 M = 0; M < 4*(N_Y/8)*(N_X/8); M++)
+	{
+		lc.shutdown(M,true);
+		lc.setIntensity(M,4);
+		lc.clearDisplay(M);
+	}
+*/	
+  DELAY(1000);
+  lc.LC_ClearLeds_notLedStatus();
+  lc.LC_ClearLedStatus();
+  lc.LC_ClearLeds_notLedStatus();
 	for(int8 M = 0; M < (N_Y/8)*(N_X/8); M++)
 	{
 		lc.shutdown(M,false);
 		lc.setIntensity(M,4);
-		lc.clearDisplay(M);
-	}
+ 	}
+  lc.LC_ClearLeds_notLedStatus();
 #endif
-
 }
-
 
 void LM_SetPoint(int8 a_x, int8 a_y, int8 a_Val)
 {
-	int8 Xi, Xb;
-
-	Xi = a_x/8;
-	Xb = a_x%8;
-
-	if ( a_y>=0 && a_y<N_Y && Xi>=0 && Xi<N_X/8)
+	if ( a_y>=0 && a_y<N_Y && a_x>=0 && a_x<N_X)
 	{
+		int8 Xi, Xb;
+
+		Xi = a_x/8;
+		Xb = a_x%8;
+
+		
 		if (a_Val==0)
 		{
 			Matrix[a_y][Xi] &= ((1<<Xb)^0xff);
@@ -59,8 +69,6 @@ int8 LM_GetPoint(int8 a_x, int8 a_y)
 	return((Matrix[a_y][Xi]>>Xb)&1);
 }
 
-
-
 void LM_Clear()
 {
 	int8 x,y;
@@ -73,7 +81,6 @@ void LM_Clear()
 		}
 	}
 }
-
 
 void LM_CopyImage2Matrix(uint8 * a_pI)
 {

@@ -2,8 +2,12 @@
 #include "Stick.h"
 #include "LED_Matrix.h"
 
-
 Stick::Stick(void)
+{
+	Init();
+}
+
+void Stick::Init(void)
 {
 	m_Loc_s.m_w = STICK_DEFAULT_WIDTH;
 	m_Loc_s.m_h = STICK_DEFAULT_HEIGHT;

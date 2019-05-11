@@ -63,6 +63,12 @@
     <ClInclude Include="Char_BM.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="BrickArrTemp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BallArr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -105,6 +111,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Char_BM.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BrickArrTemp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BallArr.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

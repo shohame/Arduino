@@ -185,7 +185,8 @@ void Bricks::ClearAllBricksBallsWalls()
 	m_BrickCount = 0;
 	m_BallCount = 0;
 	m_WallCount = 0;
-	m_PriceCount = 0;
+  m_PriceCount = 0;
+  m_FireCount = 0;
 }
 
 void Bricks::AddBrick(int8 a_x, int8 a_y)
