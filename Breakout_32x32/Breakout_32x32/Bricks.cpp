@@ -71,19 +71,19 @@ void Bricks::MoveAllFires(int16 a_dT_mSec)
 	int8 BrickID;
 	FireArr* pBrickArr = &m_FireArr;
 	Fire *pBrick;
-
+	stBrickTouchProp TouchProp_s;
 	pBrickArr->IterBegin();
 	while((pBrick = pBrickArr->IterNext()) != NULL)
 	{
 		pBrick->Move(a_dT_mSec);
-
-		BrickID = pBrick->FindBallCollision(m_WallArr.m_Brick_a, m_WallArr.m_Count);
+		
+		BrickID = pBrick->FindCollision(m_WallArr.m_Brick_a, m_WallArr.m_Count, &TouchProp_s);
 		if (BrickID>=0)
 		{
 			m_FireArr.IterRemove();
 		}
 
-		BrickID = pBrick->FindBallCollision(m_BrickArr.m_Brick_a, m_BrickArr.m_Count);
+		BrickID = pBrick->FindCollision(m_BrickArr.m_Brick_a, m_BrickArr.m_Count, &TouchProp_s);
 		if (BrickID>=0)
 		{
 			if (RAND_INT(0, GIVE_PRICE_RATE) == 0)
@@ -103,6 +103,7 @@ void Bricks::MoveAllPrices(int16 a_dT_mSec)
 {
 	PriceArr* pBrickArr = &m_PriceArr;
 	Price *pBrick;
+	stBrickTouchProp TouchProp_s;
 
 
 	pBrickArr->IterBegin();
@@ -114,7 +115,8 @@ void Bricks::MoveAllPrices(int16 a_dT_mSec)
 			pBrickArr->IterRemove();
 			continue;
 		}
-		if (pBrick->Where_I_TouchStick(&m_Stick))
+		pBrick->FindCollision(&m_Stick, 1, &TouchProp_s);
+		if (TouchProp_s.m_isTouch)
 		{	
 			GetThePrice(pBrick->m_eType, ROUND_CORD_TO_U8(pBrick->m_Loc_s.m_X), ROUND_CORD_TO_U8(pBrick->m_Loc_s.m_Y));
 			pBrickArr->IterRemove();

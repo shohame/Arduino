@@ -17,6 +17,7 @@ class Ball : public MovingBrick
 public:
 	Ball(void);
 	~Ball(void);
+
 	void Init();
 	void Init(int8 a_x, int8 a_y, float32 a_Vx, float32 a_Vy);
 

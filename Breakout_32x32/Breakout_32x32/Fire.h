@@ -9,7 +9,7 @@
 #define	FIRE_DEFAULT_SPEED		-10		// 3 Pixel / Sec
 
 
-class Fire : public Ball
+class Fire : public MovingBrick
 {
 public:
 
