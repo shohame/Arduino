@@ -21,7 +21,7 @@ typedef struct sBrickTouchProp
 {
 	int8 m_isTouch;
 	int8 m_Direction;
-	int8 m_Depth;
+	float32 m_Depth;
 
 	int8 m_dAngle; // just when ball hit the stick - to change the angle!
 }stBrickTouchProp;
