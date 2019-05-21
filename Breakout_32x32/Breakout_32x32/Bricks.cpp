@@ -105,6 +105,7 @@ void Bricks::MoveAllPrices(int16 a_dT_mSec)
 	Price *pBrick;
 	stBrickTouchProp TouchProp_s;
 
+
 	pBrickArr->IterBegin();
 	while((pBrick = pBrickArr->IterNext()) != NULL)
 	{
@@ -168,6 +169,8 @@ void Bricks::ClearAllBricksBallsWalls()
 	m_PriceArr.	ClearAll();	
 	m_FireArr.	ClearAll();
 }
+
+
 
 void Bricks::InitLeve_Clear()
 {

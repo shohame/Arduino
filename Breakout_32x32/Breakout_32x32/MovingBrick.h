@@ -19,8 +19,7 @@
 class MovingBrick : public Brick
 {
 public:
-	virtual	void Init(){};
-	void Init(int8 a_x, int8 a_y, float32 a_Vx, float32 a_Vy);
+	void Init();
 
 	uint8 m_MB_Type;
 	stVector   m_V_s;		// velocity
