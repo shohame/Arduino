@@ -1,12 +1,20 @@
 #ifndef __BREAKS_H
 #define __BREAKS_H
 
+//#include "BrickArrTemp.h"
 
-#define MAX_NUM_OF_BREAKS	((8)*4)
+#define MAX_NUM_OF_BREAKS		((8)*4)
 #define MAX_NUM_OF_BALLS		(10)
 #define MAX_NUM_OF_WALLS		(10)
 #define MAX_NUM_OF_PRICE		(5)
-#define MAX_NUM_OF_FIRE			(5)
+#define MAX_NUM_OF_FIRE			(10)
+
+typedef BrickArrTemp<Brick, MAX_NUM_OF_BREAKS>	BrickArr;
+typedef BrickArrTemp<Ball,	MAX_NUM_OF_BALLS>	BallArr;
+typedef BrickArrTemp<Brick, MAX_NUM_OF_WALLS>	WallArr;
+typedef BrickArrTemp<Price,	MAX_NUM_OF_PRICE>	PriceArr;
+typedef BrickArrTemp<Fire,	MAX_NUM_OF_FIRE>	FireArr;
+
 
 #define GIVE_PRICE_RATE		5  // for each 5 bricks give 1 price
 
@@ -18,35 +26,14 @@ public:
 
 	Display	m_Disply;
 
-	int8	m_BrickCount;
-	Brick	m_Brick_arr[MAX_NUM_OF_BREAKS];
-
-	int8	m_BallCount;
-	Ball	m_Ball_arr[MAX_NUM_OF_BALLS];
-
-	int8	m_WallCount;
-	Brick	m_Wall_arr[MAX_NUM_OF_WALLS];
-
-	int8	m_PriceCount;
-	Price	m_Price_arr[MAX_NUM_OF_PRICE];
-
-	int8	m_FireCount;
-	Fire	m_Fire_arr[MAX_NUM_OF_FIRE];
+	BallArr		m_BallArr;
+	BrickArr	m_BrickArr;
+	WallArr		m_WallArr;
+	PriceArr	m_PriceArr;
+	FireArr		m_FireArr;
 
 	Stick	m_Stick;
 
-	void AddBrick(int8 a_x, int8 a_y);
-	void AddBall(int8 a_x, int8 a_y, float32 a_Vx, float32 a_Vy );
-	void AddWall(int8 a_x, int8 a_y, int8 a_w, int8 a_h);
-	void AddPrice(int8 a_x, int8 a_y);
-	void AddFire(int8 a_x, int8 a_y);
-
-	void RemoveBrick(int8 a_BrickIdx);
-	void RemoveBall (int8 a_BallIndex);
-	void RemoveWall (int8 a_WallIndex);
-	void RemovePrice(int8 a_PriceIndex);
-	void RemoveFire (int8 a_FireIndex);
-	
 	void MoveAllBalls(int16 a_dT_mSec);
 	void MoveAllPrices(int16 a_dT_mSec);
 	void MoveAllFires(int16 a_dT_mSec);

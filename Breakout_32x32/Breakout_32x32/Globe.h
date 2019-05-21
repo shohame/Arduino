@@ -7,6 +7,5 @@ void Draw_Globe();
 
 
 
-
 #endif	//	#ifndef __GLOBE_H
 

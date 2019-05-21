@@ -24,7 +24,7 @@ class Stick : public Brick
 public:
 	eStickType m_Type;
 	Stick(void);
-	virtual void Init();
+	void Init();
 
 	~Stick(void);
 	void MarkBrickOnMatrix(void);

@@ -66,7 +66,10 @@
     <ClInclude Include="BrickArrTemp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BallArr.h">
+    <ClInclude Include="MovingBrick.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Breakout.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -113,10 +116,10 @@
     <ClCompile Include="Char_BM.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BrickArrTemp.cpp">
+    <ClCompile Include="MovingBrick.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BallArr.cpp">
+    <ClCompile Include="Breakout.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

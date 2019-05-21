@@ -1,7 +1,6 @@
 #ifndef __SCORE_H
 #define __SCORE_H
 
-
 #define NUM_OF_PRICE 5
 #define NUM_OF_DIG	(10 + NUM_OF_PRICE)
 #define DIG_WIDTH	3

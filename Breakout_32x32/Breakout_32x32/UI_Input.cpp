@@ -2,7 +2,6 @@
 #include "General.h"
 #include "UI_Input.h"
 
-
 UI_Input::UI_Input(void)
 {
 #ifndef WIN32

@@ -1,6 +1,5 @@
 
 
-
 typedef struct Line_Bit
 {
 	int8 b0:1;

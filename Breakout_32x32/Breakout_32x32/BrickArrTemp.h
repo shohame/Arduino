@@ -1,9 +1,6 @@
 #ifndef __BREAK_ARR_TEMP_H
 #define __BREAK_ARR_TEMP_H
 
-#define MAX_NUM_OF_BREAKS_2	((8)*4)
-
-
 
 template <class T, int8 MAX_COUNT>
 class BrickArrTemp
@@ -14,7 +11,6 @@ public:
 	T		m_Brick_a[MAX_COUNT];
 	int8	m_IterIdx;
 
-//	template <class T, int8 MAX_COUNT>
 	BrickArrTemp()
 	{
 		m_MaxCount = MAX_COUNT;
@@ -23,12 +19,53 @@ public:
 
 	~BrickArrTemp(){}
 
-//	template <class T, int8 MAX_COUNT>
+	void ClearAll()
+	{
+		m_Count = 0;
+		m_IterIdx = 0;
+	}
+
 	void Add()
 	{
 		if (m_Count<m_MaxCount)
 		{
 			m_Brick_a[m_Count].Init();
+			m_Count++;
+		}
+	}
+
+	void Add(int8 a_x, int8 a_y)
+	{
+		if (m_Count<m_MaxCount)
+		{
+			m_Brick_a[m_Count].Init(a_x,   a_y);
+			m_Count++;
+		}
+	}
+
+	void Add(int8 a_x, int8 a_y, float32 a_Vx, float32 a_Vy)
+	{
+		if (m_Count<m_MaxCount)
+		{
+			m_Brick_a[m_Count].Init(a_x, a_y, a_Vx, a_Vy);
+			m_Count++;
+		}
+	}
+
+	void Add(int8 a_x, int8 a_y, int8 a_w, int8 a_h)
+	{
+		if (m_Count<m_MaxCount)
+		{
+			m_Brick_a[m_Count].Init(a_x, a_y,  a_w,  a_h);
+			m_Count++;
+		}
+	}
+
+	void Add(int8 a_x, int8 a_y, ePriceType a_Type)
+	{
+		if (m_Count<m_MaxCount)
+		{
+			m_Brick_a[m_Count].Init(a_x, a_y,  a_Type);
 			m_Count++;
 		}
 	}
@@ -39,6 +76,18 @@ public:
 		{
 			m_Brick_a[a_BrickIdx] = m_Brick_a[m_Count-1];
 			m_Count--;
+
+		}
+	}
+
+	void MarkBrickArrOnMatrix()
+	{
+		T* pBrick;
+
+		IterBegin();
+		while((pBrick = IterNext()) != NULL)
+		{
+			pBrick->MarkBrickOnMatrix();
 		}
 	}
 

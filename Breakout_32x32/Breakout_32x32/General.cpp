@@ -6,7 +6,6 @@
 
 uint32 g_Tic;
 
-
 #ifdef WIN32
 
 #else

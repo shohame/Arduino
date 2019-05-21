@@ -8,7 +8,6 @@ const uint8 g_LedStatus[50][16 * 8] PROGMEM =
 		#include "Globe_Data.h" 
 
 
-
 void CopyImage2LedStatus(uint8 * a_pI)
 {
 	for(uint8 My = 0; My<4; My++)

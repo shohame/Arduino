@@ -18,6 +18,23 @@ void Brick::Init(void)
 	m_Loc_s.m_h = BREAK_DEFAULT_HEIGHT;
 }
 
+void Brick::Init(int8 a_x, int8 a_y)
+{
+	m_Loc_s.m_X = a_x;
+	m_Loc_s.m_Y = a_y;
+	m_Loc_s.m_w = BREAK_DEFAULT_WIDTH;
+	m_Loc_s.m_h = BREAK_DEFAULT_HEIGHT;
+}
+
+void Brick::Init(int8 a_x, int8 a_y, int8 a_w, int8 a_h)
+{
+	m_Loc_s.m_X = a_x;
+	m_Loc_s.m_Y = a_y;
+	m_Loc_s.m_w = a_w;
+	m_Loc_s.m_h = a_h;
+}
+
+
 Brick::~Brick(void)
 {
 }
@@ -52,10 +69,8 @@ void Brick::SetLoc(int8 a_x, int8 a_y, int8 a_w, int8 a_h)
 }
 
 
-int8 Brick::WhereBrickTouchMe (Brick * a_pBrick, float32* a_pD)
+void Brick::WhereBrickTouchMe (Brick * a_pBrick, stBrickTouchProp* a_pTouchProp)
 {
-	int8 TouchDir = 0;
-	*a_pD = 0.0;
 
 	stLoc	Y_Loc = a_pBrick->m_Loc_s;
 	stLoc	M_Loc = m_Loc_s;
@@ -73,10 +88,21 @@ int8 Brick::WhereBrickTouchMe (Brick * a_pBrick, float32* a_pD)
 	float32 dX  = ( Y_half_w + M_half_w) - abs( Y_Cx - M_Cx); // if dX > 0  ==> Thay can be tuched!
 	float32 dY  = ( Y_half_h + M_half_h) - abs( Y_Cy - M_Cy); // if dy > 0  ==> Thay can be tuched!
 	
+
+
 	if ( dX > 0 && dY > 0) // 
 	{
-		*a_pD = (dX<dY) ? dX : dY;
-		TouchDir = ( (dX > dY) ? HORIZONTAL : VERTICAL ); // 1 => Tuching the horizontal eage, 2 => Vertical
+		a_pTouchProp->m_isTouch = true;
+		a_pTouchProp->m_Depth = (dX<dY) ? dX : dY;
+		a_pTouchProp->m_Direction = ( (dX > dY) ? HORIZONTAL : VERTICAL ); // 1 => Tuching the horizontal eage, 2 => Vertical
+		a_pTouchProp->m_dAngle = 45 * (M_Cx - Y_Cx) / Y_half_w;
 	}
-	return TouchDir;
+	else
+	{
+		a_pTouchProp->m_isTouch = false;
+		a_pTouchProp->m_Direction = NO_TOUCH;
+		a_pTouchProp->m_Depth = 0;
+		a_pTouchProp->m_dAngle = 0;
+	}
 }
+

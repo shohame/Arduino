@@ -2,8 +2,6 @@
 #ifndef __LED_MATRIX_H
 #define __LED_MATRIX_H
 
-
-
 #define N_X	32
 #define N_Y	32
 

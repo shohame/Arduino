@@ -2,7 +2,6 @@
 #ifndef __GENERAL_H
 #define __GENERAL_H
 
-
 #define MAX_FRAME_TIME 150 // above MAX_FRAME_TIME it will slow the game (just for slow computers not Arduino)
 #define DO_DEBUG true
 
@@ -12,7 +11,6 @@
 
 #include <math.h>
 #include <time.h>
-
 
 // Data types:
 #ifdef WIN32

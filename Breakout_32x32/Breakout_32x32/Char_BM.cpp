@@ -4,7 +4,6 @@
 #include "Led_Matrix.h"
 
 
-
 const  Line_Bit  CharBM_arr[][CHAR_HEIGHT] PROGMEM = CHAR_BITMAP_ARR;
 
 

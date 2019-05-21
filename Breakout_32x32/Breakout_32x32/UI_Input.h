@@ -1,7 +1,6 @@
 #ifndef __UI_INPUT_H
 #define __UI_INPUT_H
 
-
 #define PIN_KEY_L	5
 #define PIN_KEY_R	3
 #define PIN_KEY_U	2

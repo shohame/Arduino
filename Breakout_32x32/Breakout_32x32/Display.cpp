@@ -8,7 +8,6 @@ const   Line_Bit  Digit_arr[NUM_OF_DIG][DIG_HEIGHT] PROGMEM =
 	{	
 		#include "Number_Bitmap.h"
 	};
-
 					
 Display::Display(void)
 {

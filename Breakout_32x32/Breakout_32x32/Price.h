@@ -27,7 +27,8 @@ public:
 
 	Price(void);
 	~Price(void);
-	virtual void Init();
+	void Init();
+	void Init(int8 a_x, int8 a_y, ePriceType a_Type);
 
 	void MarkBrickOnMatrix();
 

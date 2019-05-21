@@ -19,7 +19,6 @@ Stick::~Stick(void)
 {
 }
 
-
 void Stick::ChangeStickType(eStickType a_StickType)
 {
 	m_Type = a_StickType;

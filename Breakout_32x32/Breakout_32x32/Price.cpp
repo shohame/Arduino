@@ -20,6 +20,15 @@ void Price::Init(void)
 	m_Acceleration = 0;
 }
 
+void Price::Init(int8 a_x, int8 a_y, ePriceType a_Type)
+{
+	Init();
+
+	m_Loc_s.m_X = a_x;
+	m_Loc_s.m_Y = a_y;
+	m_eType = a_Type;
+}
+
 
 Price::~Price(void)
 {
