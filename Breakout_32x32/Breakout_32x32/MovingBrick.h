@@ -1,8 +1,6 @@
 #ifndef __MOVING_BRICK_H
 #define __MOVING_BRICK_H
 
-#include "General.h"
-#include "Brick.h"
 
 //#define	BALL_DEFAULT_WIDTH	2
 //#define	BALL_DEFAULT_HEIGHT	2
@@ -19,7 +17,7 @@
 class MovingBrick : public Brick
 {
 public:
-	void Init();
+	void Init(int8 a_x, int8 a_y, float32 a_Vx, float32 a_Vy);
 
 	uint8 m_MB_Type;
 	stVector   m_V_s;		// velocity

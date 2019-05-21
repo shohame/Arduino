@@ -1,5 +1,8 @@
 #include "StdAfx.h"
 #include <math.h>
+#include "General.h"
+#include "Brick.h"
+#include "MovingBrick.h"
 #include "Ball.h"
 
 Ball::Ball(void)

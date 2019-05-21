@@ -1,10 +1,9 @@
 #include "stdafx.h"
 #include "General.h"
 #include "Led_Matrix.h"
-#include "Ball.h"
-#include "Stick.h"
-
+#include "Brick.h"
 #include "MovingBrick.h"
+#include "Stick.h"
 #include "Ball.h"
 #include "Fire.h"
 #include "Price.h"

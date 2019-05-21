@@ -1,9 +1,6 @@
 #ifndef __BALL_H
 #define __BALL_H
 
-#include "General.h"
-#include "Brick.h"
-#include "MovingBrick.h"
 
 #define	BALL_DEFAULT_WIDTH	2
 #define	BALL_DEFAULT_HEIGHT	2

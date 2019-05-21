@@ -1,9 +1,6 @@
 #ifndef __PRICE_H
 #define __PRICE_H
 
-#include "Brick.h"
-#include "Ball.h"
-
 #define PRICE_DEFAULT_WIDTH		3
 #define	PRICE_DEFAULT_HEIGHT	4
 #define	PRICE_DEFAULT_SPEED		3		// 3 Pixel / Sec

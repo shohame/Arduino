@@ -1,8 +1,6 @@
 #ifndef __STICK_H
 #define __STICK_H
 
-#include "General.h"
-#include "Brick.h"
 
 #define	STICK_DEFAULT_WIDTH		7
 #define	STICK_DEFAULT_HEIGHT	1

@@ -1,5 +1,7 @@
 #include "stdafx.h"
 #include "General.h"
+#include "Brick.h"
+#include "MovingBrick.h"
 #include "Display.h"
 #include "Led_Matrix.h"
 #include "Price.h"

@@ -1,4 +1,7 @@
 #include "StdAfx.h"
+#include "General.h"
+#include "Brick.h"
+#include "MovingBrick.h"
 #include "Stick.h"
 #include "LED_Matrix.h"
 
