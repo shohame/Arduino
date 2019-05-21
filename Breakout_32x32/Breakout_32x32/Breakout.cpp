@@ -3,6 +3,8 @@
 #include "Led_Matrix.h"
 #include "Ball.h"
 #include "Stick.h"
+
+#include "MovingBrick.h"
 #include "Ball.h"
 #include "Fire.h"
 #include "Price.h"

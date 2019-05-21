@@ -18,6 +18,7 @@ void Price::Init(void)
 	m_Loc_s.m_X = -1;
 	m_Loc_s.m_Y = -1;
 	m_Acceleration = 0;
+	m_MB_Type = eMB_Price;
 }
 
 void Price::Init(int8 a_x, int8 a_y, ePriceType a_Type)

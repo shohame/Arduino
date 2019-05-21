@@ -10,13 +10,19 @@
 
 #define MAX_ANGLE (75)
 
+#define	eMB_Unknow	 0
+#define	eMB_Ball	 1
+#define	eMB_Fire	 2
+#define	eMB_Price	 3
+
 
 class MovingBrick : public Brick
 {
 public:
-	void Init();
+	virtual	void Init(){};
+	void Init(int8 a_x, int8 a_y, float32 a_Vx, float32 a_Vy);
 
-
+	uint8 m_MB_Type;
 	stVector   m_V_s;		// velocity
 	int8 m_Acceleration;	// +10 percent for each 100 sec 
 

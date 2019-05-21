@@ -95,7 +95,7 @@ void Brick::WhereBrickTouchMe (Brick * a_pBrick, stBrickTouchProp* a_pTouchProp)
 		a_pTouchProp->m_isTouch = true;
 		a_pTouchProp->m_Depth = (dX<dY) ? dX : dY;
 		a_pTouchProp->m_Direction = ( (dX > dY) ? HORIZONTAL : VERTICAL ); // 1 => Tuching the horizontal eage, 2 => Vertical
-		a_pTouchProp->m_dAngle = 45 * (M_Cx - Y_Cx) / Y_half_w;
+		a_pTouchProp->m_dAngle = (int8)(45.0 * (M_Cx - Y_Cx) / Y_half_w);
 	}
 	else
 	{

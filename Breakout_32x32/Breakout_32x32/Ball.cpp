@@ -12,15 +12,13 @@ void Ball::Init(void)
 	m_Acceleration = BALL_DEFAULT_ACCSELERATION;
 	m_Loc_s.m_w = BALL_DEFAULT_WIDTH;
 	m_Loc_s.m_h = BALL_DEFAULT_HEIGHT;
+	m_MB_Type = eMB_Ball;
 }
 
 void Ball::Init(int8 a_x, int8 a_y, float32 a_Vx, float32 a_Vy)
 {
 	Init();
-	m_Loc_s.m_X = a_x;
-	m_Loc_s.m_Y = a_y;
-	m_V_s.m_X = a_Vx;
-	m_V_s.m_Y = a_Vy;
+	MovingBrick::Init(a_x, a_y, a_Vx, a_Vy);
 }
 
 

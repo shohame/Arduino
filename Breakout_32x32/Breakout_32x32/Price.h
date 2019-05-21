@@ -19,7 +19,7 @@ enum ePriceType
 	eFire
 };
 
-class Price : public Ball
+class Price : public MovingBrick
 
 {
 public:

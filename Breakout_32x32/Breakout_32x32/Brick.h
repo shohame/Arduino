@@ -22,7 +22,6 @@ typedef struct sBrickTouchProp
 	int8 m_isTouch;
 	int8 m_Direction;
 	float32 m_Depth;
-
 	int8 m_dAngle; // just when ball hit the stick - to change the angle!
 }stBrickTouchProp;
 
@@ -32,7 +31,6 @@ class Brick
 {
 
 public:
-
 	stLoc m_Loc_s;	
 
 	Brick(void);
