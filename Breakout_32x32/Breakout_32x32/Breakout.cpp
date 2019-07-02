@@ -42,39 +42,40 @@ void Setup()
 
 void Loop()
 {
+	Bricks *pBricks = &g_Bricks; 
 	int16 Toc = (int16)TOC_mS();
 	Toc = MIN(Toc, MAX_FRAME_TIME);
-	if (g_Bricks.m_BrickArr.m_Count == 0)
+	if (pBricks->m_BrickArr.m_Count == 0)
 	{
 		DELAY(500);
 		Level ++;
-		g_Bricks.InitLevel(Level);
+		pBricks->InitLevel(Level);
 	}
-	if (g_Bricks.m_BallArr.m_Count==0)
+	if (pBricks->m_BallArr.m_Count==0)
 	{
 		DELAY(500);
-		if (g_Bricks.m_Disply.m_Life == 0) // Game Over
+		if (pBricks->m_Disply.m_Life == 0) // Game Over
 		{
 			DELAY(1000);		
 			RestartGame();
 		}
 		else
 		{
-			g_Bricks.m_Disply.m_Life--;
-			g_Bricks.m_BallArr.Add(16,28, (float)3, (float)-6.0);
-			g_Bricks.m_Stick.ChangeStickType(eStickRegular);
+			pBricks->m_Disply.m_Life--;
+			pBricks->m_BallArr.Add(16,28, (float)3, (float)-6.0);
+			pBricks->m_Stick.ChangeStickType(eStickRegular);
 		}
  	}
 
 	TIC_mS();
   
-	g_Bricks.MoveAllBalls(Toc);
-	g_Bricks.MoveAllPrices(Toc);
-	g_Bricks.MoveAllFires(Toc);
+	pBricks->MoveAllBalls(Toc);
+	pBricks->MoveAllPrices(Toc);
+	pBricks->MoveAllFires(Toc);
 
 	LM_Clear();
-	g_Bricks.MarkBricksOnMatrix();
-	g_Bricks.m_Disply.MarkOnMatrix(Toc);
+	pBricks->MarkBricksOnMatrix();
+	pBricks->m_Disply.MarkOnMatrix(Toc);
 	LM_PC_DSP_Display_Matrix();
 	
 	stKeyStatus P1_s, P2_s;
@@ -82,19 +83,18 @@ void Loop()
 	g_UI_In.GetKeyStatus(&P1_s, &P2_s);
 
 	if ( P1_s.m_R)
-		g_Bricks.m_Stick.m_Loc_s.m_X += 0.9f;
+		pBricks->m_Stick.m_Loc_s.m_X += 0.9f;
 	if (  P1_s.m_L)
-		g_Bricks.m_Stick.m_Loc_s.m_X -= 0.9f;
-	if (P1_s.m_U && g_Bricks.m_Stick.m_Type == eStickFire)
+		pBricks->m_Stick.m_Loc_s.m_X -= 0.9f;
+	if (P1_s.m_U && pBricks->m_Stick.m_Type == eStickFire)
 	{
-		int8 x = ROUND_CORD_TO_U8(g_Bricks.m_Stick.m_Loc_s.m_X + ((g_Bricks.m_Stick.m_Loc_s.m_w - 1)/2));
-		int8 y = ROUND_CORD_TO_U8(g_Bricks.m_Stick.m_Loc_s.m_Y - 1);
-		g_Bricks.m_FireArr.Add(x, y, (float)0, (float)FIRE_DEFAULT_SPEED); 
+		int8 x = ROUND_CORD_TO_U8(pBricks->m_Stick.m_Loc_s.m_X + ((pBricks->m_Stick.m_Loc_s.m_w - 1)/2));
+		int8 y = ROUND_CORD_TO_U8(pBricks->m_Stick.m_Loc_s.m_Y - 1);
+		pBricks->m_FireArr.Add(x, y, (float)0, (float)FIRE_DEFAULT_SPEED); 
 	}
 
 	if (P1_s.m_U && P1_s.m_D && P1_s.m_L && P1_s.m_R)
 	{
-	
 		resetFunc();
 	}
 
