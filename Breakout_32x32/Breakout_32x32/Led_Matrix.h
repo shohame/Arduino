@@ -7,8 +7,6 @@
 
 #define N_LED	(N_X * N_Y)
 
-extern int8 Matrix[N_Y][N_X/8];
-
 void LM_Setup();
 void LM_Clear();
 
