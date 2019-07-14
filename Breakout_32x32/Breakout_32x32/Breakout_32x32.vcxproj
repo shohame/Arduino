@@ -85,6 +85,7 @@
     <ClInclude Include="BrickArrTemp.h" />
     <ClInclude Include="Bricks.h" />
     <ClInclude Include="Char_BM.h" />
+    <ClInclude Include="Char_BM_HEB_RAW.h" />
     <ClInclude Include="Fire.h" />
     <ClInclude Include="General.h" />
     <ClInclude Include="Globe.h" />

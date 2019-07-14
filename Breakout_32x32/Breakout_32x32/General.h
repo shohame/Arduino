@@ -52,8 +52,8 @@ extern uint32 g_Tic;
 	#define SERIAL_BEGIN(F)
 	#define SERIAL_PRINT(F) 
 	#define SERIAL_PRINTLN(F) 
-	#define TIC_mS()   g_Tic = ((uint32)clock())
-	#define TOC_mS()   ((uint32)((clock()-g_Tic)))
+	#define TIC_mS()   g_Tic = ((uint32)clock()/1)
+	#define TOC_mS()   ((uint32)((clock()/1-g_Tic)))
 	#define DELAY(a) Sleep(a)
 	#define PROGMEM
 	#define pgm_read_word_near(A) (*A)

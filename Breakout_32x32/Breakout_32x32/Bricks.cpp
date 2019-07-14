@@ -1,5 +1,6 @@
 #include "StdAfx.h"
 #include "General.h"
+#include "Char_BM.h"
 #include "Brick.h"
 #include "MovingBrick.h"
 #include "Ball.h"
@@ -239,10 +240,8 @@ void Bricks::InitLevel(int8 a_Level)
 		m_WallArr.Add(6,	21,	(int8)20,	(int8)2);	
 		m_WallArr.Add(29,	21,	(int8)3,	(int8)2);	
 
-
 		break;
-
 	}
-	m_BallArr.Add(16,28, (float)3.0, (float)-6.0);
+	m_BallArr.Add(16,28, (float)3.0, (float)-6.1);
 }
 
