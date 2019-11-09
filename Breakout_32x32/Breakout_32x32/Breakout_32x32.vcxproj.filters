@@ -48,9 +48,6 @@
     <ClInclude Include="Brick.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Bricks.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Price.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -73,6 +70,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Char_BM_HEB_RAW.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameControl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -104,9 +104,6 @@
     <ClCompile Include="Brick.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Bricks.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Price.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -123,6 +120,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Breakout.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameControl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

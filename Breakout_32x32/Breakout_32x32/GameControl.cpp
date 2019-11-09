@@ -9,18 +9,18 @@
 #include "Stick.h"
 #include "Display.h"
 #include "BrickArrTemp.h"
-#include "Bricks.h"
+#include "GameControl.h"
 
 
-Bricks::Bricks(void)
+GameControl::GameControl(void)
 {
 	ClearAllBricksBallsWalls();
 }
-Bricks::~Bricks(void)
+GameControl::~GameControl(void)
 {
 }
 
-void Bricks::MarkBricksOnMatrix()
+void GameControl::MarkBricksOnMatrix()
 {
 	m_BrickArr.	MarkBrickArrOnMatrix();
 	m_BallArr.	MarkBrickArrOnMatrix();
@@ -32,7 +32,7 @@ void Bricks::MarkBricksOnMatrix()
 }
 
 
-void Bricks::MoveAllBalls(int16 a_dT_mSec)
+void GameControl::MoveAllBalls(int16 a_dT_mSec)
 {
 	int8 BrickID;
 	BallArr* pBrickArr = &m_BallArr;
@@ -67,7 +67,7 @@ void Bricks::MoveAllBalls(int16 a_dT_mSec)
 	}
 }
 
-void Bricks::MoveAllFires(int16 a_dT_mSec)
+void GameControl::MoveAllFires(int16 a_dT_mSec)
 {
 	int8 BrickID;
 	FireArr* pBrickArr = &m_FireArr;
@@ -100,7 +100,7 @@ void Bricks::MoveAllFires(int16 a_dT_mSec)
 	}
 }
 
-void Bricks::MoveAllPrices(int16 a_dT_mSec)
+void GameControl::MoveAllPrices(int16 a_dT_mSec)
 {
 	PriceArr* pBrickArr = &m_PriceArr;
 	Price *pBrick;
@@ -127,7 +127,7 @@ void Bricks::MoveAllPrices(int16 a_dT_mSec)
 }
 
 
-void Bricks::GetThePrice(ePriceType a_eType, int8 a_x, int8 a_y)
+void GameControl::GetThePrice(ePriceType a_eType, int8 a_x, int8 a_y)
 {
 	switch(a_eType)
 	{
@@ -162,7 +162,7 @@ void Bricks::GetThePrice(ePriceType a_eType, int8 a_x, int8 a_y)
 	}
 }
 
-void Bricks::ClearAllBricksBallsWalls()
+void GameControl::ClearAllBricksBallsWalls()
 {
 	m_BrickArr.	ClearAll();
 	m_BallArr.	ClearAll();
@@ -173,7 +173,7 @@ void Bricks::ClearAllBricksBallsWalls()
 
 
 
-void Bricks::InitLeve_Clear()
+void GameControl::InitLeve_Clear()
 {
 	ClearAllBricksBallsWalls();
 
@@ -185,7 +185,7 @@ void Bricks::InitLeve_Clear()
 	m_WallArr.Add(24,0,(int8)1, (int8)6);		// Score / Life divader 
 }
 
-void Bricks::AddLineOfBricks(int8 a_x0, int8 a_y0, int8 a_Count)
+void GameControl::AddLineOfBricks(int8 a_x0, int8 a_y0, int8 a_Count)
 {
 	for(int8 x=0; x<a_Count; x++)
 	{
@@ -194,7 +194,7 @@ void Bricks::AddLineOfBricks(int8 a_x0, int8 a_y0, int8 a_Count)
 }
 
 
-void Bricks::InitLevel(int8 a_Level)
+void GameControl::InitLevel(int8 a_Level)
 {
 	InitLeve_Clear();
 

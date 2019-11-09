@@ -10,13 +10,13 @@
 #include "Price.h"
 #include "Display.h"
 #include "BrickArrTemp.h"
-#include "Bricks.h"
+#include "GameControl.h"
 #include "UI_Input.h"
 #include "Globe.h"
 
 #include "Breakout.h"
 
-Bricks g_Bricks;
+GameControl g_Bricks;
 UI_Input g_UI_In;
 int8 Level = 1;
 
@@ -41,7 +41,7 @@ void Setup()
 
 void Loop()
 {
-	Bricks *pBricks = &g_Bricks; 
+	GameControl *pBricks = &g_Bricks; 
 	int16 Toc = (int16)TOC_mS();
 	Toc = MIN(Toc, MAX_FRAME_TIME);
 	//Toc = 30;

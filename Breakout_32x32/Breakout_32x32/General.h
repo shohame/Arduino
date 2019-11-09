@@ -75,7 +75,7 @@ extern uint32 g_Tic;
 #define PI (3.14159265358979f)
 #define ROUND_CORD_TO_U8(C) ((int8)floor(0.5f+C))
 #define fSIGN(a) ( (a>=0.0f) ? 1.0f : -1.0f ) 
-#define ABS(a) ( (a>0) ? (a) : (-a) ) 
+#define ABS(a) ( ((a)>0) ? (a) : (-(a)) ) 
 #define POW2(a) (a*a)
 
 #define MAX(a,b) (((a)>(b))?(a):(b))
