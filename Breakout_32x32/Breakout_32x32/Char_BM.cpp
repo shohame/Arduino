@@ -19,7 +19,7 @@ Char_BM::Char_BM(void)
 	m_UN_idx = _UN_INDEX;
 }
 
-#include <string>
+//#include <string>
 uint8 Char_BM::WriteStr(char a_pChar[], int8 a_X, int8 a_Y)
 {
 	uint8 Len = strlen(a_pChar);

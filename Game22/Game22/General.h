@@ -36,6 +36,15 @@
 
 extern uint32 g_Tic;
 
+
+enum eDirection
+{
+	eDirU = 0,
+	eDirR = 1,
+	eDirD = 2,
+	eDirL = 3,
+};
+
 // Includs:
 #ifdef WIN32
 	#include <Windows.h>

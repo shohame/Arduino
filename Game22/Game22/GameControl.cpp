@@ -36,6 +36,7 @@ int T_Delay;
 int g_isFree_1;
 int g_isFree_2;
 
+SnakePath SnakePath_a[2];
 
 
 
@@ -45,6 +46,9 @@ stPoint Dir_arr[4] = {{0,-1}, {1,0}, {0,1}, {-1,0}}; // Up, Right, Down, Left
 
 void GC_ResetGame()
 {
+	SnakePath_a[0].Reset();
+	SnakePath_a[1].Reset();
+
 	P1 = P1s;
 	P2 = P2s;	
 
@@ -69,19 +73,19 @@ void Switch_Direction(stKeyStatus *a_pKeyStat, int8* a_pDir)
 {
 	if (a_pKeyStat->m_L)
 	{
-		*a_pDir = 3;
+		*a_pDir = eDirL;
 	}
 	if (a_pKeyStat->m_R)
 	{
-		*a_pDir = 1;
+		*a_pDir = eDirR;
 	}
 	if (a_pKeyStat->m_U)
 	{
-		*a_pDir = 0;
+		*a_pDir = eDirU;
 	}
 	if (a_pKeyStat->m_D)
 	{
-		*a_pDir = 2;
+		*a_pDir = eDirD;
 	}
 
 }
@@ -200,4 +204,3 @@ void GC_Loop()
 	
 	DoGameOver(g_isFree_1, g_isFree_2);
 }
-
