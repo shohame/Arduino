@@ -201,6 +201,17 @@ void GameControl::InitLevel(int8 a_Level)
 	switch(a_Level)
 	{
 	case 1:
+		AddLineOfBricks(0, 8, 8);
+		AddLineOfBricks(2, 11, 7);
+		break;
+		break;
+	case 2:
+		AddLineOfBricks(0, 8, 8);
+		AddLineOfBricks(2, 11, 7);
+		AddLineOfBricks(0, 14, 8);
+		AddLineOfBricks(2, 17, 7);
+		break;
+	case 3:
 		m_WallArr.Add(8, 12, (int8)1, (int8)14);
 		m_WallArr.Add(22, 12, (int8)1, (int8)14);
 		m_WallArr.Add(8, 25, (int8)15, (int8)1);
@@ -211,9 +222,8 @@ void GameControl::InitLevel(int8 a_Level)
 		m_BrickArr.Add(20, 10);
 		m_BrickArr.Add(10, 14);
 		m_BrickArr.Add(18, 18);
-		m_BrickArr.Add(10, 2);
 		break;
-	case 2:
+	case 4:
 		m_WallArr.Add(3, 10, (int8)1, (int8)14);
 		m_WallArr.Add(4, 13, (int8)7, (int8)2);
 		m_WallArr.Add(26, 10, (int8)1, (int8)14);
@@ -227,7 +237,7 @@ void GameControl::InitLevel(int8 a_Level)
 		m_BrickArr.Add(6, 9);
 		m_BrickArr.Add(21, 9);
 		break;
-	case 3:
+	case 5:
 		m_WallArr.Add(0, 17, (int8)6, (int8)1);
 		m_WallArr.Add(10, 17, (int8)11, (int8)1);
 		m_WallArr.Add(26, 17, (int8)6, (int8)1);
@@ -241,21 +251,15 @@ void GameControl::InitLevel(int8 a_Level)
 		m_BrickArr.Add(21, 19);
 		m_BrickArr.Add(26, 22);
 		break;
-	case 4:
-		AddLineOfBricks(0, 8,  8);
-		AddLineOfBricks(2, 11, 7);
-		AddLineOfBricks(0, 14,  8);
-		AddLineOfBricks(2, 17,  7);
-		break;
-	case 5:
-		AddLineOfBricks(0, 8,  8);
+	case 6:
+		AddLineOfBricks(0, 8, 8);
 		AddLineOfBricks(2, 15, 7);
 
-		m_WallArr.Add(0, 12, (int8)11, (int8)1);	
-		m_WallArr.Add(21 ,12,(int8)11 , (int8)1);	
+		m_WallArr.Add(0, 12, (int8)11, (int8)1);
+		m_WallArr.Add(21, 12, (int8)11, (int8)1);
 		break;
 
-	case 6:
+	case 7:
 		AddLineOfBricks(0, 8,  8);
 		AddLineOfBricks(2, 11, 7);
 
@@ -264,7 +268,7 @@ void GameControl::InitLevel(int8 a_Level)
 		m_WallArr.Add(0, 23, (int8)9,	(int8)1);	
 		m_WallArr.Add(15, 23, (int8)13, (int8)1);	
 		break;
-	case 7:
+	case 8:
 		AddLineOfBricks(0, 8,  8);
 
 		m_BrickArr.Add(3, 21);
@@ -277,10 +281,6 @@ void GameControl::InitLevel(int8 a_Level)
 		m_WallArr.Add(6,	21,	(int8)20,	(int8)2);	
 		m_WallArr.Add(29,	21,	(int8)3,	(int8)2);	
 
-		break;
-	case 8:
-		AddLineOfBricks(0, 8, 8);
-		AddLineOfBricks(2, 11, 7);
 		break;
 
 	}
