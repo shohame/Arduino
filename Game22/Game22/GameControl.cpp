@@ -36,7 +36,8 @@ int T_Delay;
 int g_isFree_1;
 int g_isFree_2;
 
-SnakePath SnakePath_a[2];
+SnakePath SnakePath1;
+SnakePath SnakePath2;
 
 
 
@@ -46,14 +47,17 @@ stPoint Dir_arr[4] = {{0,-1}, {1,0}, {0,1}, {-1,0}}; // Up, Right, Down, Left
 
 void GC_ResetGame()
 {
-	SnakePath_a[0].Reset();
-	SnakePath_a[1].Reset();
 
 	P1 = P1s;
 	P2 = P2s;	
 
-	g_Di1 = 0;  // direction of 1	
-	g_Di2 = 0;  // direction of 2	
+	SnakePath1.Reset();
+	SnakePath2.Reset();
+	SnakePath1.AddPoint(P1);
+	SnakePath2.AddPoint(P2);
+
+	g_Di1 = eDirU;  // direction of 1	
+	g_Di2 = eDirU;  // direction of 2	
 	
 	P12idx = 0;
 	GameOver = 0;
@@ -71,23 +75,10 @@ void GC_ResetGame()
 
 void Switch_Direction(stKeyStatus *a_pKeyStat, int8* a_pDir)
 {
-	if (a_pKeyStat->m_L)
-	{
-		*a_pDir = eDirL;
-	}
-	if (a_pKeyStat->m_R)
-	{
-		*a_pDir = eDirR;
-	}
-	if (a_pKeyStat->m_U)
-	{
-		*a_pDir = eDirU;
-	}
-	if (a_pKeyStat->m_D)
-	{
-		*a_pDir = eDirD;
-	}
-
+	if (a_pKeyStat->m_L)	*a_pDir = eDirL;
+	if (a_pKeyStat->m_R)    *a_pDir = eDirR;
+	if (a_pKeyStat->m_U)	*a_pDir = eDirU;
+	if (a_pKeyStat->m_D)	*a_pDir = eDirD;
 }
 
 int Test_if_Free_and_Set(stPoint* pP)
@@ -122,7 +113,6 @@ void delay_and_change_dir_goto_next_step(int D)
 
 		Switch_Direction(&g_KeyStat_1, &g_Di1);
 		Switch_Direction(&g_KeyStat_2, &g_Di2);
-	
 	}
 	
 	P1.m_X += Dir_arr[g_Di1].m_X;
@@ -186,6 +176,10 @@ void GC_Loop()
 		
 		LM_PC_DSP_Display_Matrix();
 		delay_and_change_dir_goto_next_step(T_Delay);
+
+		SnakePath1.AddPoint(P1);
+		SnakePath2.AddPoint(P2);
+
 
 		if (P12idx<MAX_P_IN_ARR)
 		{
