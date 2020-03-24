@@ -26,10 +26,6 @@ int8 g_Di2 = 0;  // direction of 1
 
 #define MAX_P_IN_ARR 100
 
-stPoint P1_arr[MAX_P_IN_ARR];
-stPoint P2_arr[MAX_P_IN_ARR];
-int16 P12idx = 0;
-
 int8 GameOver = 0;
 int T_Delay;
 
@@ -59,7 +55,6 @@ void GC_ResetGame()
 	g_Di1 = eDirU;  // direction of 1	
 	g_Di2 = eDirU;  // direction of 2	
 	
-	P12idx = 0;
 	GameOver = 0;
 	T_Delay = 100;
 	
@@ -148,6 +143,32 @@ void delay_and_change_dir_goto_next_step(int D)
 
 void DoGameOver(int a_isFree_1, int a_isFree_2)
 {
+	SnakePath1.IterReset();
+	SnakePath2.IterReset();
+	stPoint P;
+	int GoOn = true;
+	
+	while (GoOn)
+	{
+		if (a_isFree_1==0)
+		{
+			GoOn = SnakePath1.IterGetNext(&P);
+			LM_SetPoint (P.m_X, P.m_Y, 0);
+		}
+		if (a_isFree_2==0)
+		{
+			GoOn = SnakePath2.IterGetNext(&P);
+			LM_SetPoint (P.m_X, P.m_Y, 0);
+		}
+
+		LM_PC_DSP_Display_Matrix();
+		DELAY(30);
+	}
+}
+
+/*
+void DoGameOver_old(int a_isFree_1, int a_isFree_2)
+{
 	for(int i=0; i<P12idx-1; i++)
 	{
 		if (a_isFree_1==0)
@@ -162,7 +183,7 @@ void DoGameOver(int a_isFree_1, int a_isFree_2)
 		DELAY(30);
 	}
 }
-
+*/
 
 void GC_Loop()
 {
@@ -171,7 +192,7 @@ void GC_Loop()
 	Test_if_Free_and_Set(&P1);
 	Test_if_Free_and_Set(&P2);
 
-	while (GameOver == 0)
+	while (!GameOver)
 	{
 		
 		LM_PC_DSP_Display_Matrix();
@@ -180,19 +201,9 @@ void GC_Loop()
 		SnakePath1.AddPoint(P1);
 		SnakePath2.AddPoint(P2);
 
-
-		if (P12idx<MAX_P_IN_ARR)
-		{
-			P1_arr[P12idx] = P1;
-			P2_arr[P12idx] = P2;
-			P12idx++;
-
-		}
-
 		if (g_isFree_1 == 0 || g_isFree_2 == 0)
 		{
 			GameOver = 1;
-			
 		}
 	}
 	

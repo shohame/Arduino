@@ -30,9 +30,11 @@ public:
 
 	Path	m_IterPath;
 	int16	m_IterIndex;
-
+	stPoint	m_IterPc;
+	
 	void	IterReset() ;
-	int8	IterGetNext(stPoint *a_pP)	;
+	int8	IterGetNext(stPoint *a_pP);
+	void IterUpdatePc(eDirection a_Dir);
 };
 
 
